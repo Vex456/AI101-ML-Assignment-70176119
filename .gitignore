@@ -9,7 +9,12 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Datasets and large model checkpoints (Course rule: no files > 50 MB)
-data/
+data/*
+!data/README.md
+*.csv
+*.tsv
+*.xls
+*.xlsx
 *.pt
 *.pth
 *.h5
