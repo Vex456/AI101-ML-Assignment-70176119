@@ -1,0 +1,63 @@
+{
+  "models": [
+    {
+      "Model": "Logistic Regression",
+      "Modality": "Combined",
+      "Best_Threshold": 0.785,
+      "Val_F1": 0.849,
+      "Test_Precision": 0.84,
+      "Test_Recall": 0.769,
+      "Test_F1": 0.803,
+      "PR_AUC": 0.907,
+      "ROC_AUC": 0.992
+    },
+    {
+      "Model": "SGD Classifier (Linear SVM)",
+      "Modality": "Combined",
+      "Best_Threshold": 0.863,
+      "Val_F1": 0.79,
+      "Test_Precision": 0.825,
+      "Test_Recall": 0.723,
+      "Test_F1": 0.77,
+      "PR_AUC": 0.854,
+      "ROC_AUC": 0.987
+    },
+    {
+      "Model": "Gradient Boosting",
+      "Modality": "Combined",
+      "Best_Threshold": 0.48,
+      "Val_F1": 0.855,
+      "Test_Precision": 0.925,
+      "Test_Recall": 0.762,
+      "Test_F1": 0.835,
+      "PR_AUC": 0.806,
+      "ROC_AUC": 0.98
+    }
+  ],
+  "ablation": [
+    {
+      "Feature_Set": "1. Structured Only",
+      "Precision": 0.232,
+      "Recall": 0.531,
+      "F1_Score": 0.322,
+      "PR_AUC": 0.209,
+      "ROC_AUC": 0.843
+    },
+    {
+      "Feature_Set": "2. Text Only (TF-IDF)",
+      "Precision": 0.86,
+      "Recall": 0.754,
+      "F1_Score": 0.803,
+      "PR_AUC": 0.902,
+      "ROC_AUC": 0.988
+    },
+    {
+      "Feature_Set": "3. Combined Multimodal",
+      "Precision": 0.84,
+      "Recall": 0.769,
+      "F1_Score": 0.803,
+      "PR_AUC": 0.907,
+      "ROC_AUC": 0.992
+    }
+  ]
+}
