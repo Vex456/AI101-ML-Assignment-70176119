@@ -1,0 +1,93 @@
+{
+  "metrics": {
+    "Model 1 (Greedy)": {
+      "BLEU": 2.09,
+      "chrF": 14.97
+    },
+    "Model 1 (Beam k=4)": {
+      "BLEU": 3.18,
+      "chrF": 15.81
+    },
+    "Model 2 (MarianMT)": {
+      "BLEU": 22.76,
+      "chrF": 44.23
+    }
+  },
+  "length_buckets": {
+    "1-10": 1.51,
+    "11-20": 3.69,
+    "21-30": 4.77
+  },
+  "examples": [
+    {
+      "Source (English)": "My 50 hours of community service meant cleaning a city I didn't care about.",
+      "Reference (Urdu)": "کے بارے میں میں پرواہ نہیں ایک شہر کی صفائی کا مطلب کمیونٹی کی خدمت میری 50 گھنٹے",
+      "Model 1 (Greedy)": "<unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> میں <unk> میں میں <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>",
+      "Model 1 (Beam k=4)": "<unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> میں <unk> <unk> میں <unk> <unk> <unk> <unk> <unk> <unk> <unk>",
+      "Model 2 (MarianMT)": "کمیونٹی سروس کے 50 گھنٹے کا مطلب تھا کہ میں نے اس شہر کی صفائی نہیں کی تھی."
+    },
+    {
+      "Source (English)": "UM, HE'S MY MOM'S BOYFRIEND.",
+      "Reference (Urdu)": "UM، وہ میری ماں اور پریمی کے.",
+      "Model 1 (Greedy)": "میرا مسئلہ میرا مسئلہ <unk> <unk>",
+      "Model 1 (Beam k=4)": "<unk> <unk> <unk> <unk> <unk> <unk>",
+      "Model 2 (MarianMT)": "Sangmin، وہ میری ماں کے دوست ہے."
+    },
+    {
+      "Source (English)": "Family lives in Kuwait. We've been listening in on their calls.",
+      "Reference (Urdu)": "فون کال سننے سے پتہ چلا کہ اس کا خاندان کویت میں ہے",
+      "Model 1 (Greedy)": "ان میں <unk> میں <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>",
+      "Model 1 (Beam k=4)": "<unk> <unk> میں <unk> میں <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>",
+      "Model 2 (MarianMT)": "ہم نے ان کے فون پر سن رہے ہیں."
+    },
+    {
+      "Source (English)": "He created man",
+      "Reference (Urdu)": "انسان کو پیدا کیا ہے",
+      "Model 1 (Greedy)": "اس نے نے پیدا پیدا پیدا پیدا کیا پیدا کیا",
+      "Model 1 (Beam k=4)": "اس نے انسان کو ٹھیکرے پیدا پیدا پیدا کیا پیدا کیا",
+      "Model 2 (MarianMT)": "اسی نے انسان کو پیدا کیا۔"
+    },
+    {
+      "Source (English)": "WHEN THE SKY is split asunder,",
+      "Reference (Urdu)": "جب آسمان شگافتہ ہوجائے گا",
+      "Model 1 (Greedy)": "جب آسمان پھٹ جائے گا جب آسمان پھٹ جائے گا",
+      "Model 1 (Beam k=4)": "جب جب آسمان پھٹ جائے گا",
+      "Model 2 (MarianMT)": "جب آسمان پھٹ جائے گا"
+    },
+    {
+      "Source (English)": "It is most hateful in the sight of God if you say something and do not practice it.",
+      "Reference (Urdu)": "اللہ کے نزدیک بہت سخت ناپسندیدہ بات یہ ہے کہ تم وہ بات کہو جو خود نہیں کرتے،",
+      "Model 1 (Greedy)": "اور اس کی میں میں سے وعدہ سچا ہے اگر تم تم سے کرو اور تم سے بھی نہ کرو",
+      "Model 1 (Beam k=4)": "اور اگر تم اس میں سے وعدہ سچا ہے اگر تم سے وعدہ سچا کرو اور تم پر ایمان نہیں",
+      "Model 2 (MarianMT)": "اللہ کے نزدیک یہ بڑی ناراضی کی بات ہے کہ تم کہو ایسی بات جو کرو نہیں۔"
+    },
+    {
+      "Source (English)": "But why have not bracelets of gold been put upon him, or why have there not come with him angels as companions?",
+      "Reference (Urdu)": "پھر کیوں اس کے اوپر سونے کے کنگن نہیں نازل کئے گئے اور کیوں اس کے ساتھ ملائکہ جمع ہوکر نہیں آئے",
+      "Model 1 (Greedy)": "اور ان کے نہ نہ کیوں نہیں نہ نہ یا اس کے نہ نہ یا اس کے پاس نہ نہ",
+      "Model 1 (Beam k=4)": "اور کیوں نہیں کیوں نہیں کہ اس نے نہ نہ نہ یا اس کے پاس نہ نہ یا اس کے پاس نہ نہ",
+      "Model 2 (MarianMT)": "پھر (اگر یہ سچا رسول ہے تو) اِس پر (پہننے کے لئے) سونے کے کنگن کیوں نہیں اتارے جاتے یا اِس کے ساتھ فرشتے جمع ہو کر (پے در پے) کیوں نہیں آجاتے؟،"
+    },
+    {
+      "Source (English)": "His heart did not lie of what he saw.",
+      "Reference (Urdu)": "(اُن کے) دل نے اُس کے خلاف نہیں جانا جو (اُن کی) آنکھوں نے دیکھا،",
+      "Model 1 (Greedy)": "اس نے اس کے بارے میں سے نہیں دیکھا کہ جو ان کے پیچھے نہ تھا",
+      "Model 1 (Beam k=4)": "اس اس کے بارے میں نے نہیں دیکھا کہ جو ان کے بارے میں سے نہیں کرتا",
+      "Model 2 (MarianMT)": "دل نے جھوٹ نہیں کہا جسے (پیغمبر نے) دیکھا"
+    },
+    {
+      "Source (English)": "Blogger Mehreen Kasana wrote on her blog:",
+      "Reference (Urdu)": "بلاگر مہرین کسانہ نے اپنے بلاگ پر لکھا:",
+      "Model 1 (Greedy)": "<unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>",
+      "Model 1 (Beam k=4)": "<unk> <unk> <unk> <unk> <unk> <unk>",
+      "Model 2 (MarianMT)": "وزیرِاعظم الوہ نے اپنے بلاگ پر لکھا:"
+    },
+    {
+      "Source (English)": "I'm really, really scared, dad!",
+      "Reference (Urdu)": "میں واقعی ہوں، واقعی ڈر، والد صاحب!",
+      "Model 1 (Greedy)": "<unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>",
+      "Model 1 (Beam k=4)": "<unk> <unk> <unk>",
+      "Model 2 (MarianMT)": "میں واقعی ہوں، واقعی ڈر، والد صاحب!"
+    }
+  ]
+}
