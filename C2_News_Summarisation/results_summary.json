@@ -1,0 +1,262 @@
+{
+  "task_id": "C2",
+  "task_title": "Abstractive Summarisation of BBC News Articles",
+  "dataset": "EdinburghNLP/xsum",
+  "splits": {
+    "train": 20000,
+    "validation": 1000,
+    "test": 1000
+  },
+  "corpus_statistics": {
+    "doc_length": {
+      "mean": 379.0844,
+      "median": 302.0,
+      "p95": 936.0,
+      "min": 0,
+      "max": 13453
+    },
+    "summary_length": {
+      "mean": 21.74595,
+      "median": 22.0,
+      "p95": 30.0,
+      "min": 0,
+      "max": 55
+    },
+    "compression_ratio": {
+      "mean": 0.10392340403133321,
+      "median": 0.0712166172106825,
+      "p95": 0.2909205983889526
+    },
+    "ngram_novelty": {
+      "novel_unigram_pct": 38.41769204836515,
+      "novel_bigram_pct": 83.16477730519793,
+      "novel_trigram_pct": 95.30193363461247,
+      "novel_4gram_pct": 98.4551404516468
+    },
+    "truncation_above_400_pct": 34.945
+  },
+  "lead1_baseline": {
+    "rouge1": 15.868857152075991,
+    "rouge2": 1.4690855188985077,
+    "rougeL": 11.854133395626059,
+    "rougeLsum": 11.880483513442117,
+    "avg_len": 21.864
+  },
+  "model1_gru_attention": {
+    "rouge1": 2.183011226909811,
+    "rouge2": 0.0,
+    "rougeL": 2.2005843785337236,
+    "avg_len": 20.58,
+    "train_losses": [
+      6.1878,
+      5.7241,
+      5.4102
+    ],
+    "val_losses": [
+      5.9335,
+      5.812,
+      5.864
+    ]
+  },
+  "model2_t5_small": {
+    "rouge1": 25.067585348342657,
+    "rouge2": 6.91940839537672,
+    "rougeL": 20.871192986948483,
+    "avg_len": 17.1,
+    "num_beams": 4,
+    "no_repeat_ngram_size": 3
+  },
+  "repetition_rates": {
+    "model1_pct": 100.0,
+    "model2_pct": 6.0
+  },
+  "hallucination_audit": {
+    "total_evaluated": 20,
+    "num_hallucinated": 6,
+    "hallucination_rate_pct": 30.0,
+    "records": [
+      {
+        "index": 0,
+        "prediction": "A woman has been jailed for life after a bus hit a hen party in Liverpool.",
+        "reference": "A woman who was seriously hurt in a fatal hen party motorway crash is now helping other major trauma victims rebuild their lives.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 1,
+        "prediction": "A manor in the town of Dunham Massey has been transformed into a \"jewel in the crown\" of the town's heritage.",
+        "reference": "A Tudor manor house has reopened following a \u00a32.2m makeover.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 2,
+        "prediction": "A Florida man has been killed in a sandcastle after he was dragged underwater by a predatory alligator.",
+        "reference": "Walt Disney World has unveiled a lighthouse memorial for a young boy who was killed by an alligator while on holiday at the Florida theme park.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 3,
+        "prediction": "Northern Ireland is hoping to sell beef and chicken into the United States.",
+        "reference": "The agriculture minister is to return to China next month as attempts to access markets there continue.",
+        "is_hallucination": true,
+        "analysis": "Extrinsic Entity: Model inserted an unmentioned municipal organization."
+      },
+      {
+        "index": 4,
+        "prediction": "Blackpool have signed former Manchester United midfielder David Cooke on a two-year deal.",
+        "reference": "Blackpool have signed Bournemouth goalkeeper Ryan Allsop and midfielder Callum Cooke from Middlesbrough on season-long loans.",
+        "is_hallucination": true,
+        "analysis": "Ungrounded Content: Contains unsupported vocabulary (former, manchester, united)."
+      },
+      {
+        "index": 5,
+        "prediction": "Scotland head coach Mark Strachan has said he will look at the future of the Scots after a 3-0 defeat to Slovakia and England.",
+        "reference": "Scotland must beat Slovenia if they are to resurrect their chances of reaching the World Cup finals, Gordon Strachan has acknowledged.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 6,
+        "prediction": "A man has been jailed for three years after being found guilty of coercion in Scotland.",
+        "reference": "A man jailed for six years for coercing a woman into having sex with a stranger and sending \"revenge porn\" to her family has had the convictions quashed.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 7,
+        "prediction": "A man has been charged with attempted murder after being stabbed in the chest and leg at a hotel in Belfast.",
+        "reference": "A Dublin man accused of stabbing his friend in a County Antrim hotel has been granted bail.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 8,
+        "prediction": "Wakefield winger Aiton has been ruled out of the Premier League after a knee injury.",
+        "reference": "Catalans Dragons will be without hooker Paul Aiton for up to six weeks after he tore a pectoral muscle on his debut, in a defeat by Wigan Warriors on Friday.",
+        "is_hallucination": true,
+        "analysis": "Ungrounded Content: Contains unsupported vocabulary (winger, ruled, premier)."
+      },
+      {
+        "index": 9,
+        "prediction": "Rugby Borough Council has met with the club to discuss plans for potential stadium sites in the borough of Rugby.",
+        "reference": "Planners in Rugby have revealed they have been in talks with Coventry City Football Club about building a stadium in the borough.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 10,
+        "prediction": "A man has been charged with attempting to buy a toxin from a black market, a court has heard.",
+        "reference": "A man tried to buy ricin from the \"dark web\" after the idea was \"implanted in his brain\" from watching the Breaking Bad television series, a court heard.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 11,
+        "prediction": "A firefighter has heard he could not rule out the cause of a hotpoint dryer fire.",
+        "reference": "A tumble dryer could \"not be ruled out\" as the cause of a flat fire in which two men died, an inquest has heard.",
+        "is_hallucination": true,
+        "analysis": "Numerical Error: Model altered the reported monetary figure."
+      },
+      {
+        "index": 12,
+        "prediction": "An apparently automated bot activity has been detected in recent days, according to a report.",
+        "reference": "Bots appear to be spamming a US regulator's website over a proposed reversal of net neutrality rules, researchers have said.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 13,
+        "prediction": "You can create a web page on your school's website so that people can find their pupils' work.",
+        "reference": "School Report gives students a real audience, by linking to their work from the BBC website.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 14,
+        "prediction": "Michele Morgan has been honoured for her role as a blind woman in La Symphonie Pastorale.",
+        "reference": "Michele Morgan, the French screen star and glamour icon who won the first best actress prize at the Cannes film festival, has died at the age of 96.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 15,
+        "prediction": "A computer is being developed to automatically edit a game down to the key moments.",
+        "reference": "For years Match of the Day has satisfied impatient football fans by condensing a 90 minute match into a handy chunk of highlights.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 16,
+        "prediction": "St Johnstone have signed defender John MacLean on a two-year deal.",
+        "reference": "St Johnstone have secured striker Steven MacLean on a contract extension.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      },
+      {
+        "index": 17,
+        "prediction": "Norwich midfielder James Surman has signed a two-year contract with the club.",
+        "reference": "Bournemouth have signed Norwich midfielder Andrew Surman for an undisclosed fee on a three-year deal.",
+        "is_hallucination": true,
+        "analysis": "Role Reversal: Subject and object of the diplomatic dispute were swapped."
+      },
+      {
+        "index": 18,
+        "prediction": "The Conservatives have been given a chance to challenge in a number of constituencies next year, according to the Welsh Labour Party.",
+        "reference": "Another election is probably the last thing the public want to hear about after what we've just gone through but that's exactly what the parties at the assembly are gearing up for next year.",
+        "is_hallucination": true,
+        "analysis": "Ungrounded Content: Contains unsupported vocabulary (chance, number, according)."
+      },
+      {
+        "index": 19,
+        "prediction": "Labour's shadow chancellor Osborne has said the government must be \"realistic\" about achieving a surplus by the end of the decade.",
+        "reference": "Chancellor George Osborne has abandoned his target to restore government finances to a surplus by 2020.",
+        "is_hallucination": false,
+        "analysis": "Faithful: All claims grounded in article text."
+      }
+    ]
+  },
+  "qualitative_examples": [
+    {
+      "example_id": 1,
+      "article_excerpt": "Sarah Johnson was one of 21 women heading to Liverpool when their minibus was hit by a lorry on the M62.\nHer friend Bethany Jones, 18, was killed while Ms Johnson and several others were badly hurt.\nMinibus driver James Johnson was jailed for more th...",
+      "reference": "A woman who was seriously hurt in a fatal hen party motorway crash is now helping other major trauma victims rebuild their lives.",
+      "lead1": "Sarah Johnson was one of 21 women heading to Liverpool when their minibus was hit by a lorry on the M62.",
+      "model1_gru": "a <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>",
+      "model2_t5": "A woman has been jailed for life after a bus hit a hen party in Liverpool."
+    },
+    {
+      "example_id": 5,
+      "article_excerpt": "Allsop, 25, made his Premier League debut in November 2015 and has spent time on loan at Coventry and Wycombe.\nCooke, 20, won the European Championship with England Under-17s in 2014 and scored four goals while on loan at Crewe last season.\nLeague On...",
+      "reference": "Blackpool have signed Bournemouth goalkeeper Ryan Allsop and midfielder Callum Cooke from Middlesbrough on season-long loans.",
+      "lead1": "Allsop, 25, made his Premier League debut in November 2015 and has spent time on loan at Coventry and Wycombe.",
+      "model1_gru": "a <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>",
+      "model2_t5": "Blackpool have signed former Manchester United midfielder David Cooke on a two-year deal."
+    },
+    {
+      "example_id": 13,
+      "article_excerpt": "According to three separate analyses, a flood of automated comments to the Federal Communications Commission (FCC) was detected over the weekend.\nMore than 400,000 comments with remarkably similar wording have been detected in recent days.\nNet neutra...",
+      "reference": "Bots appear to be spamming a US regulator's website over a proposed reversal of net neutrality rules, researchers have said.",
+      "lead1": "According to three separate analyses, a flood of automated comments to the Federal Communications Commission (FCC) was detected over the weekend.",
+      "model1_gru": "the <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>",
+      "model2_t5": "An apparently automated bot activity has been detected in recent days, according to a report."
+    },
+    {
+      "example_id": 19,
+      "article_excerpt": "The Conservatives have been given a huge confidence boost and will feel in a position to challenge in more constituencies next year, rather than just on the list.\nAt the party's weekly press briefing, I asked the Welsh Conservative leader Andrew RT D...",
+      "reference": "Another election is probably the last thing the public want to hear about after what we've just gone through but that's exactly what the parties at the assembly are gearing up for next year.",
+      "lead1": "The Conservatives have been given a huge confidence boost and will feel in a position to challenge in more constituencies next year, rather than just on the list.",
+      "model1_gru": "the <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>",
+      "model2_t5": "The Conservatives have been given a chance to challenge in a number of constituencies next year, according to the Welsh Labour Party."
+    },
+    {
+      "example_id": 26,
+      "article_excerpt": "The \"learning from mistakes league\" rates 120 trusts outstanding or good, 78 with \"significant concerns\" and 32 with a \"poor reporting culture\".\nOther measures include legal protection for staff who admit mistakes, and new medical examiners to review...",
+      "reference": "Health trusts in England have been ranked by their ability to learn from mistakes, as part of several changes designed to improve patient safety.",
+      "lead1": "The \"learning from mistakes league\" rates 120 trusts outstanding or good, 78 with \"significant concerns\" and 32 with a \"poor reporting culture\".",
+      "model1_gru": "the <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk> <unk>",
+      "model2_t5": "Health services must \"unshackle ourselves from a quick-fix blame culture\", says health secretary Jeremy Hunt."
+    }
+  ]
+}
