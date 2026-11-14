@@ -1,0 +1,27 @@
+# Environment
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# Datasets and large model checkpoints (Course rule: no files > 50 MB)
+data/
+*.pt
+*.pth
+*.h5
+*.ckpt
+*.bin
+*.model
+*.parquet
+*.arrow
+*.pkl
+*.tar.gz
+*.zip
+
+# Operating system files
+.DS_Store
+Thumbs.db

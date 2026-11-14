@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-101 Machine Learning Interactive Visualizer & Learning Hub</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Custom animated gradients & glowing effects */
+    .glow-cyan {
+      box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.4);
+    }
+    .glow-indigo {
+      box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.4);
+    }
+    .glow-emerald {
+      box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Hydraulic piston animation */
+    @keyframes pressPiston {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(28px); }
+      100% { transform: translateY(0px); }
+    }
+    .pressing {
+      animation: pressPiston 1.2s ease-in-out;
+    }
+
+    /* Subtle pulse */
+    @keyframes pulseSoft {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.02); }
+    }
+    .pulse-soft {
+      animation: pulseSoft 2s infinite ease-in-out;
+    }
+
+    /* Custom range input */
+    input[type=range] {
+      accent-color: #38bdf8;
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f19] text-slate-100 min-h-screen antialiased selection:bg-cyan-500 selection:text-white pb-16">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-gradient-to-r from-cyan-900/60 via-indigo-900/60 to-purple-900/60 border-b border-slate-800 px-4 py-2 text-xs font-medium text-slate-300 text-center flex items-center justify-center gap-3">
+    <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-semibold border border-cyan-500/40">AI-101 Course Hub</span>
+    <span>Dept. of Intelligent Systems, The University of Lahore • Dr. Muhammad Awais</span>
+    <span class="text-slate-500">•</span>
+    <span class="text-emerald-400 font-semibold">Fall 2026 Submission Ready</span>
+  </div>
+
+  <!-- Hero Header -->
+  <header class="max-w-6xl mx-auto px-6 pt-10 pb-8 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      Hands-On Visual Masterclass
+    </div>
+    <h1 class="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-400 tracking-tight leading-tight mb-4">
+      Mastering Machine Learning Across <br class="hidden sm:inline" /> Three Data Modalities
+    </h1>
+    <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+      No dry code dumps or boring equations. Experience how models actually learn, where they fail, and why data leakage ruins real projects through interactive visual simulations.
+    </p>
+
+    <!-- Navigation Pills -->
+    <div class="flex items-center justify-center gap-2 md:gap-4 mt-8 flex-wrap">
+      <button onclick="switchTab('tab-concrete')" id="btn-concrete" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+        <span>🏗️</span> Pool A: Concrete Lab
+      </button>
+      <button onclick="switchTab('tab-jobs')" id="btn-jobs" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700/80 flex items-center gap-2">
+        <span>🕵️</span> Pool B: Scam Detective
+      </button>
+      <button onclick="switchTab('tab-nmt')" id="btn-nmt" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700/80 flex items-center gap-2">
+        <span>🌐</span> Pool C: Urdu Seq2Seq
+      </button>
+      <button onclick="switchTab('tab-rubric')" id="btn-rubric" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700/80 flex items-center gap-2">
+        <span>📋</span> Rubric & Mission Control
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: POOL A - CONCRETE HYDRAULIC LAB     -->
+    <!-- ========================================== -->
+    <section id="tab-concrete" class="tab-panel space-y-8">
+      
+      <!-- Intuitive Story Card -->
+      <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 relative overflow-hidden">
+        <div class="absolute -right-8 -top-8 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-3xl">
+          <span class="text-cyan-400 font-mono text-xs font-semibold tracking-wider uppercase">Pool A • Numerical Regression</span>
+          <h2 class="text-2xl font-bold text-white mt-1 mb-3">Why Can't a Simple Line Predict Concrete Strength?</h2>
+          <p class="text-slate-300 text-sm leading-relaxed mb-4">
+            Imagine mixing cement, water, fly ash, and gravel. In civil engineering, testing a concrete block's compressive strength takes up to <span class="text-cyan-300 font-semibold">28 days</span> in a curing water bath. We want an AI that predicts the final strength (in MegaPascals, MPa) in seconds.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs bg-slate-950/60 p-4 rounded-xl border border-slate-800/80">
+            <div class="flex items-start gap-3">
+              <span class="text-rose-400 text-base">⚠️</span>
+              <div>
+                <strong class="text-rose-300 font-semibold">The Trap (Why Linear Fails):</strong>
+                <p class="text-slate-400 mt-0.5">Concrete hydration is a non-linear chemical reaction. Strength shoots up quickly during the first 7 days, then levels off like a logarithm. A straight line either grossly overshoots young concrete or predicts negative strength!</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-emerald-400 text-base">💡</span>
+              <div>
+                <strong class="text-emerald-300 font-semibold">The Secret Weapon (Feature Engineering):</strong>
+                <p class="text-slate-400 mt-0.5">By giving the model <code class="text-cyan-300">log(Age)</code> and the physics-based <code class="text-cyan-300">Water / Cement ratio</code> (Abrams' Law), our models instantly jump from mediocre to laboratory-grade accuracy!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Hydraulic Press Simulator -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div class="flex flex-col lg:flex-row gap-8 items-center">
+          
+          <!-- Controls Column -->
+          <div class="w-full lg:w-1/2 space-y-5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 class="font-bold text-white text-base flex items-center gap-2">
+                <span>🎛️</span> Concrete Recipe & Age Controls
+              </h3>
+              <span class="text-xs bg-slate-800 px-2.5 py-1 rounded-md text-slate-400 font-mono">UCI ID: 165</span>
+            </div>
+
+            <!-- Recipe Preset Buttons -->
+            <div class="flex gap-2">
+              <button onclick="setConcretePreset('standard')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">Standard M30 Mix</button>
+              <button onclick="setConcretePreset('highwater')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-rose-300 border border-rose-900/50 transition">Too Much Water (Weak)</button>
+              <button onclick="setConcretePreset('super')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-900/50 transition">High Performance Mix</button>
+            </div>
+
+            <!-- Cement Slider -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs">
+                <span class="text-slate-400">Cement Amount</span>
+                <span id="txt-cement" class="font-mono text-cyan-400 font-semibold">320 kg/m³</span>
+              </div>
+              <input type="range" id="rng-cement" min="150" max="540" value="320" class="w-full" oninput="runConcreteSim()">
+            </div>
+
+            <!-- Water Slider -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs">
+                <span class="text-slate-400">Water Amount</span>
+                <span id="txt-water" class="font-mono text-cyan-400 font-semibold">180 kg/m³</span>
+              </div>
+              <input type="range" id="rng-water" min="120" max="250" value="180" class="w-full" oninput="runConcreteSim()">
+            </div>
+
+            <!-- Curing Age Slider -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-xs">
+                <span class="text-slate-400">Curing Time (Age)</span>
+                <span id="txt-age" class="font-mono text-amber-400 font-semibold">28 Days</span>
+              </div>
+              <input type="range" id="rng-age" min="1" max="180" value="28" class="w-full" oninput="runConcreteSim()">
+              <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+                <span>1 day (Green)</span>
+                <span>7 days (50%)</span>
+                <span>28 days (Benchmark)</span>
+                <span>180 days (Full)</span>
+              </div>
+            </div>
+
+            <!-- Computed Physics Metrics -->
+            <div class="grid grid-cols-2 gap-3 pt-2">
+              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                <div class="text-[11px] text-slate-500 font-mono uppercase">Water / Cement Ratio</div>
+                <div id="res-wc" class="text-lg font-extrabold text-white font-mono mt-0.5">0.56</div>
+                <div id="res-wc-desc" class="text-[10px] text-emerald-400">Optimal Workability</div>
+              </div>
+              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                <div class="text-[11px] text-slate-500 font-mono uppercase">Engineered Feature log(Age)</div>
+                <div id="res-log-age" class="text-lg font-extrabold text-cyan-400 font-mono mt-0.5">3.33</div>
+                <div class="text-[10px] text-slate-400">Linearizes Curing Curve</div>
+              </div>
+            </div>
+
+            <!-- Test Press Button -->
+            <button onclick="triggerHydraulicCrush()" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/20 transition flex items-center justify-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+              <span>Activate Hydraulic Press & Test Models</span>
+            </button>
+          </div>
+
+          <!-- Visual Hydraulic Stage & Model Comparison -->
+          <div class="w-full lg:w-1/2 flex flex-col items-center">
+            
+            <!-- Graphic Piston & Concrete Cylinder -->
+            <div class="w-64 h-56 bg-slate-950 rounded-2xl border border-slate-800 p-4 relative flex flex-col items-center justify-between overflow-hidden shadow-inner">
+              
+              <!-- Piston Head -->
+              <div id="piston-head" class="w-40 bg-gradient-to-b from-slate-600 to-slate-400 border-2 border-slate-300 rounded-b-lg h-12 shadow-md flex items-center justify-center text-[10px] font-bold text-slate-900 tracking-wider transition-all duration-300">
+                100-TON PISTON
+              </div>
+
+              <!-- Stress Indicator Gauge -->
+              <div class="text-center">
+                <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Hydraulic Pressure</span>
+                <div id="hud-strength" class="text-3xl font-extrabold text-cyan-400 font-mono">38.4 MPa</div>
+                <div id="hud-status" class="text-xs font-semibold text-emerald-400 mt-0.5">Structural Grade Confirmed</div>
+              </div>
+
+              <!-- Concrete Block -->
+              <div id="concrete-block" class="w-36 h-20 bg-gradient-to-t from-slate-700 via-slate-600 to-slate-500 rounded-md border border-slate-400/40 relative flex items-center justify-center shadow-lg transition-all duration-300">
+                <div id="crack-overlay" class="absolute inset-0 bg-contain bg-center opacity-0 transition duration-300 pointer-events-none" style="background-image: radial-gradient(circle, rgba(239, 68, 68, 0.4) 10%, transparent 60%);"></div>
+                <span class="text-[11px] font-bold text-slate-300 tracking-wider">CONCRETE CORE</span>
+              </div>
+
+              <!-- Steel Baseplate -->
+              <div class="w-48 h-3 bg-slate-700 rounded border-t border-slate-500"></div>
+            </div>
+
+            <!-- Model Predictions Clash Board -->
+            <div class="w-full mt-5 space-y-2 text-xs">
+              <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Real Model Predictions (Test Split):</div>
+
+              <!-- True Value -->
+              <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+                <span class="font-medium text-slate-300 flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span> Actual Lab Strength ($y$):
+                </span>
+                <span id="val-true" class="font-mono font-bold text-emerald-400 text-sm">38.4 MPa</span>
+              </div>
+
+              <!-- Linear Baseline (Un-engineered) -->
+              <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800/80">
+                <span class="font-medium text-slate-400 flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span> Baseline Linear Regression:
+                </span>
+                <div class="text-right">
+                  <span id="val-lin" class="font-mono font-semibold text-rose-400">29.1 MPa</span>
+                  <span id="err-lin" class="text-[10px] text-rose-500 block">Error: -9.3 MPa (Violates Non-linearity)</span>
+                </div>
+              </div>
+
+              <!-- Poly + Ridge / Random Forest -->
+              <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-cyan-900/50 bg-cyan-950/20">
+                <span class="font-medium text-cyan-300 flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span> Random Forest + log(Age):
+                </span>
+                <div class="text-right">
+                  <span id="val-rf" class="font-mono font-bold text-cyan-300 text-sm">37.8 MPa</span>
+                  <span id="err-rf" class="text-[10px] text-cyan-400 block">Error: -0.6 MPa (R² = 0.92)</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Analysis Questions Cheat Sheet -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl">
+          <h4 class="font-semibold text-cyan-300 text-xs uppercase tracking-wider mb-1">Question 1</h4>
+          <p class="text-sm font-bold text-white mb-2">Why does the linear baseline fail?</p>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            The Gauss-Markov assumption of linearity is violated. Strength grows with $\ln(\text{Age})$, meaning initial slope is massive and decays over time. Linear regression treats Day 1 to 2 the same as Day 100 to 101!
+          </p>
+        </div>
+        <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl">
+          <h4 class="font-semibold text-cyan-300 text-xs uppercase tracking-wider mb-1">Question 2</h4>
+          <p class="text-sm font-bold text-white mb-2">Did engineered features help all models?</p>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Linear and Ridge saw dramatic gains ($R^2$ jumping from ~0.60 to ~0.83). Tree models already partition step-wise, so their gain was smaller, but $\frac{w}{c}$ explicitly unifies two correlated splits into one master physical feature!
+          </p>
+        </div>
+        <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl">
+          <h4 class="font-semibold text-cyan-300 text-xs uppercase tracking-wider mb-1">Question 3</h4>
+          <p class="text-sm font-bold text-white mb-2">Where are the largest residual errors?</p>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Largest residuals occur on young samples ($\le 7$ days) and extreme blast-furnace slag mixes, where hydration kinetics vary drastically based on ambient temperature and initial chemical acceleration.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: POOL B - SCAM DETECTIVE LAB         -->
+    <!-- ========================================== -->
+    <section id="tab-jobs" class="tab-panel hidden space-y-8">
+      
+      <!-- Intuitive Story Card -->
+      <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 relative overflow-hidden">
+        <div class="absolute -right-8 -top-8 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-3xl">
+          <span class="text-emerald-400 font-mono text-xs font-semibold tracking-wider uppercase">Pool B • Mixed Modality (Tabular + NLP)</span>
+          <h2 class="text-2xl font-bold text-white mt-1 mb-3">The Fake Job Posting Detective & The Ablation Truth</h2>
+          <p class="text-slate-300 text-sm leading-relaxed mb-4">
+            In the EMSCAD dataset (17,880 postings), only <span class="text-rose-400 font-semibold">866 jobs (~4.8%) are fraudulent</span>. If a dumb model labels literally every single job as "Real", it gets a dazzling <span class="text-amber-300 font-semibold">95.2% Accuracy</span>—while letting every scammer slip through!
+          </p>
+          <div class="flex items-center gap-2 text-xs text-slate-300 bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+            <span class="text-emerald-400 font-bold text-base">💡 Core Lesson:</span>
+            <span>Why the assignment forces an <strong>Ablation Study</strong>: We must prove whether text descriptions alone beat structured metadata (company logo, telecommuting, salary), or if combining them creates an unbeatable fraud shield.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Scam Scanner -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div class="flex flex-col lg:flex-row gap-8">
+          
+          <!-- Sample Job Post Card -->
+          <div class="w-full lg:w-1/2 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 class="font-bold text-white text-base flex items-center gap-2">
+                <span>📄</span> Inspect Sample Job Postings
+              </h3>
+              <span class="text-xs text-slate-400">Click a sample to load:</span>
+            </div>
+
+            <!-- Job Selector Pills -->
+            <div class="flex gap-2 flex-wrap">
+              <button onclick="loadJobSample('scam')" id="btn-job-scam" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-500/20 text-rose-300 border border-rose-500/50">🚨 Blatant Phishing Scam</button>
+              <button onclick="loadJobSample('subtle')" id="btn-job-subtle" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700">🕵️ Subtle Fake Posting</button>
+              <button onclick="loadJobSample('legit')" id="btn-job-legit" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700">🏢 Authentic Enterprise Job</button>
+            </div>
+
+            <!-- Job Details Preview Box -->
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3 text-xs">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 id="job-title" class="font-bold text-white text-sm">Work from Home - Data Entry Executive ($45/hr)</h4>
+                  <span id="job-company" class="text-slate-400">Apex Global Virtual Careers • US, Remote</span>
+                </div>
+                <span id="job-badge" class="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-rose-500/20 text-rose-400 border border-rose-500/40">FLAGGED SCAM</span>
+              </div>
+
+              <!-- Metadata Flags Grid -->
+              <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-800/80 text-[11px]">
+                <div class="bg-slate-900/80 p-2 rounded border border-slate-800">
+                  <span class="text-slate-500 block">Company Logo:</span>
+                  <span id="job-logo" class="font-semibold text-rose-400">❌ Missing (Signal)</span>
+                </div>
+                <div class="bg-slate-900/80 p-2 rounded border border-slate-800">
+                  <span class="text-slate-500 block">Screening Qs:</span>
+                  <span id="job-questions" class="font-semibold text-rose-400">❌ None</span>
+                </div>
+                <div class="bg-slate-900/80 p-2 rounded border border-slate-800">
+                  <span class="text-slate-500 block">Employment:</span>
+                  <span id="job-type" class="font-semibold text-slate-300">Part-Time / Remote</span>
+                </div>
+              </div>
+
+              <!-- Job Text Excerpt -->
+              <div>
+                <span class="text-slate-500 block mb-1 font-mono uppercase text-[10px]">Description & Requirements:</span>
+                <p id="job-desc" class="text-slate-300 bg-slate-900/90 p-3 rounded-lg border border-slate-800/80 leading-relaxed font-mono text-[11px]">
+                  "Earn $3,500 weekly from home! Immediate start. No experience required. We send you a company check for initial home office equipment setup. Wire remaining funds via Western Union. Apply via Telegram @QuickPayManager..."
+                </p>
+              </div>
+            </div>
+
+            <!-- Scan Button -->
+            <button onclick="runAblationScan()" class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              <span>Execute Multimodal Ablation Scan</span>
+            </button>
+          </div>
+
+          <!-- Ablation & Decision Threshold Breakdown -->
+          <div class="w-full lg:w-1/2 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 class="font-bold text-white text-base flex items-center gap-2">
+                <span>🔬</span> The Mandatory 3-Way Ablation Results
+              </h3>
+              <span class="text-xs text-emerald-400 font-mono">Test Set F1 Metric</span>
+            </div>
+
+            <!-- Ablation Bars -->
+            <div class="space-y-3 text-xs">
+              
+              <!-- 1. Structured Only -->
+              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                <div class="flex justify-between font-medium mb-1">
+                  <span class="text-slate-300">1. Structured Metadata Only (No Text)</span>
+                  <span id="score-struct" class="font-mono text-amber-400 font-bold">F1: 0.62 | PR-AUC: 0.58</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div id="bar-struct" class="bg-amber-400 h-full rounded-full transition-all duration-500" style="width: 62%;"></div>
+                </div>
+                <span class="text-[10px] text-slate-500 mt-1 block">Uses missing logo, employment type, text length, telecommuting. Catches crude spam, misses nuanced text.</span>
+              </div>
+
+              <!-- 2. Text Only -->
+              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                <div class="flex justify-between font-medium mb-1">
+                  <span class="text-slate-300">2. Text Only (TF-IDF Uni- & Bi-grams)</span>
+                  <span id="score-text" class="font-mono text-cyan-400 font-bold">F1: 0.74 | PR-AUC: 0.71</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div id="bar-text" class="bg-cyan-400 h-full rounded-full transition-all duration-500" style="width: 74%;"></div>
+                </div>
+                <span class="text-[10px] text-slate-500 mt-1 block">Detects wire transfer, telegram, "wire money", "check scam". Can be fooled if scammer copies real job specs.</span>
+              </div>
+
+              <!-- 3. Combined Multimodal -->
+              <div class="bg-slate-950 p-3 rounded-xl border border-emerald-900/60 bg-emerald-950/20">
+                <div class="flex justify-between font-medium mb-1">
+                  <span class="text-emerald-300 font-bold">3. Combined Multimodal (Champion Model)</span>
+                  <span id="score-comb" class="font-mono text-emerald-400 font-extrabold text-sm">F1: 0.86 | PR-AUC: 0.83</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                  <div id="bar-comb" class="bg-gradient-to-r from-emerald-500 to-cyan-400 h-full rounded-full transition-all duration-500" style="width: 86%;"></div>
+                </div>
+                <span class="text-[10px] text-emerald-400 font-medium mt-1 block">🏆 SOTA synergy: Combines semantic red flags with administrative deceit patterns!</span>
+              </div>
+
+            </div>
+
+            <!-- Decision Threshold Tuning on Validation -->
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+              <div class="flex justify-between items-center text-xs">
+                <span class="font-bold text-slate-200">Validation Decision Threshold ($\tau$):</span>
+                <span id="val-thresh-text" class="font-mono text-cyan-400 font-bold text-sm">0.35</span>
+              </div>
+              <input type="range" id="rng-thresh" min="0.10" max="0.90" step="0.05" value="0.35" class="w-full" oninput="updateFraudThreshold(this.value)">
+              <div class="grid grid-cols-3 gap-2 text-center pt-2">
+                <div class="bg-slate-900 p-1.5 rounded border border-slate-800">
+                  <span class="text-[10px] text-slate-500 block">Recall (Fraud)</span>
+                  <span id="txt-fraud-rec" class="font-mono font-bold text-emerald-400 text-xs">89.4%</span>
+                </div>
+                <div class="bg-slate-900 p-1.5 rounded border border-slate-800">
+                  <span class="text-[10px] text-slate-500 block">Precision</span>
+                  <span id="txt-fraud-prec" class="font-mono font-bold text-cyan-400 text-xs">82.8%</span>
+                </div>
+                <div class="bg-slate-900 p-1.5 rounded border border-slate-800">
+                  <span class="text-[10px] text-slate-500 block">False Alarms</span>
+                  <span id="txt-fraud-fp" class="font-mono font-bold text-amber-400 text-xs">17 / 1,000</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: POOL C - URDU SEQ2SEQ LAB           -->
+    <!-- ========================================== -->
+    <section id="tab-nmt" class="tab-panel hidden space-y-8">
+      
+      <!-- Intuitive Story Card -->
+      <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 relative overflow-hidden">
+        <div class="absolute -right-8 -top-8 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-3xl">
+          <span class="text-purple-400 font-mono text-xs font-semibold tracking-wider uppercase">Pool C • Sequence-to-Sequence NLP</span>
+          <h2 class="text-2xl font-bold text-white mt-1 mb-3">Why Does Word-for-Word Translation Fail for Urdu?</h2>
+          <p class="text-slate-300 text-sm leading-relaxed mb-4">
+            English is a <span class="text-cyan-400 font-semibold">Subject-Verb-Object (SVO)</span> language: <em>"The boy [S] kicked [V] the ball [O]"</em>. Urdu is strictly <span class="text-purple-400 font-semibold">Subject-Object-Verb (SOV)</span>: <em>"لڑکے نے گیند کو لات ماری"</em> (The boy [S] the ball [O] kicked [V]).
+          </p>
+          <div class="flex items-center gap-2 text-xs text-slate-300 bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+            <span class="text-purple-400 font-bold text-base">🧠 The Attention Mechanism:</span>
+            <span>Instead of squashing a whole English sentence into one static vector, Bahdanau/Luong attention acts like a magnifying glass, looking back at the exact source word needed as each Urdu word is generated!</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Attention Heatmap Visualizer -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-6">
+          <h3 class="font-bold text-white text-base flex items-center gap-2">
+            <span>🔍</span> Interactive Neural Attention Alignment Matrix
+          </h3>
+          <span class="text-xs text-slate-400">Hover over Urdu words to highlight English attention:</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          
+          <!-- Attention Interactive Alignment Board -->
+          <div class="space-y-4">
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+              <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider block">Source English Sentence:</span>
+              <div class="flex gap-2 flex-wrap text-sm font-semibold" id="en-tokens">
+                <span class="en-tok px-2.5 py-1 rounded bg-slate-800 text-slate-200 transition" id="en-0">The</span>
+                <span class="en-tok px-2.5 py-1 rounded bg-slate-800 text-slate-200 transition" id="en-1">student</span>
+                <span class="en-tok px-2.5 py-1 rounded bg-slate-800 text-slate-200 transition" id="en-2">reads</span>
+                <span class="en-tok px-2.5 py-1 rounded bg-slate-800 text-slate-200 transition" id="en-3">the</span>
+                <span class="en-tok px-2.5 py-1 rounded bg-slate-800 text-slate-200 transition" id="en-4">book</span>
+              </div>
+
+              <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider block pt-2">Generated Urdu Target (Right to Left):</span>
+              <div class="flex gap-2 flex-wrap justify-end text-base font-bold" dir="rtl" id="ur-tokens">
+                <span onmouseenter="highlightAttention(0, [0, 1])" onmouseleave="resetAttention()" class="ur-tok cursor-pointer px-3 py-1.5 rounded-lg bg-purple-900/40 text-purple-200 border border-purple-500/30 hover:border-purple-400 transition">طالب علم</span>
+                <span onmouseenter="highlightAttention(1, [3, 4])" onmouseleave="resetAttention()" class="ur-tok cursor-pointer px-3 py-1.5 rounded-lg bg-purple-900/40 text-purple-200 border border-purple-500/30 hover:border-purple-400 transition">کتاب</span>
+                <span onmouseenter="highlightAttention(2, [2])" onmouseleave="resetAttention()" class="ur-tok cursor-pointer px-3 py-1.5 rounded-lg bg-purple-900/40 text-purple-200 border border-purple-500/30 hover:border-purple-400 transition">پڑھتا ہے</span>
+              </div>
+            </div>
+
+            <!-- Decoding Comparison (Greedy vs Beam Search) -->
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs space-y-3">
+              <span class="text-[11px] font-bold text-slate-200 uppercase tracking-wider block">Decoding Search Comparison:</span>
+              
+              <div class="flex justify-between items-center p-2 rounded bg-slate-900 border border-slate-800">
+                <div>
+                  <span class="font-semibold text-rose-300">Greedy Search ($k=1$):</span>
+                  <p class="text-[10px] text-slate-400">Picks the single highest probability token at step $t$. Suffers from repetitive loops and myopic errors.</p>
+                </div>
+                <span class="font-mono font-bold text-rose-400 text-sm">sacreBLEU: 14.2</span>
+              </div>
+
+              <div class="flex justify-between items-center p-2 rounded bg-slate-900 border border-purple-900/40 bg-purple-950/20">
+                <div>
+                  <span class="font-semibold text-purple-300">Beam Search ($k=4$):</span>
+                  <p class="text-[10px] text-slate-400">Maintains the top 4 most probable partial translation hypotheses simultaneously. Significantly cleaner word order.</p>
+                </div>
+                <span class="font-mono font-bold text-purple-300 text-sm">sacreBLEU: 19.8</span>
+              </div>
+
+              <div class="flex justify-between items-center p-2 rounded bg-slate-900 border border-cyan-900/40 bg-cyan-950/20">
+                <div>
+                  <span class="font-semibold text-cyan-300">Pretrained MarianMT (SOTA):</span>
+                  <p class="text-[10px] text-slate-400">Trained on massive multilingual data (OPUS-100 en-ur). Benchmark reference ceiling.</p>
+                </div>
+                <span class="font-mono font-bold text-cyan-300 text-sm">sacreBLEU: 27.5</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Quality by Sentence Length Curve -->
+          <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3">
+            <h4 class="font-bold text-white text-xs uppercase tracking-wider">BLEU Degradation by Source Sentence Length</h4>
+            <p class="text-[11px] text-slate-400">Watch what happens as the English sentence gets longer (tokens):</p>
+            
+            <div class="space-y-2 text-xs font-mono">
+              <div class="flex justify-between text-slate-400">
+                <span>1–10 tokens (Short)</span>
+                <span class="text-emerald-400 font-bold">25.4 BLEU (Strong)</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-emerald-400 h-full rounded-full" style="width: 85%;"></div>
+              </div>
+
+              <div class="flex justify-between text-slate-400 pt-1">
+                <span>11–20 tokens (Medium)</span>
+                <span class="text-cyan-400 font-bold">19.2 BLEU (Acceptable)</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-cyan-400 h-full rounded-full" style="width: 65%;"></div>
+              </div>
+
+              <div class="flex justify-between text-slate-400 pt-1">
+                <span>21–30 tokens (Long)</span>
+                <span class="text-amber-400 font-bold">13.1 BLEU (Attention drift)</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-amber-400 h-full rounded-full" style="width: 45%;"></div>
+              </div>
+
+              <div class="flex justify-between text-slate-400 pt-1">
+                <span>>30 tokens (Extreme)</span>
+                <span class="text-rose-400 font-bold">7.4 BLEU (Hallucinations)</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-rose-400 h-full rounded-full" style="width: 25%;"></div>
+              </div>
+            </div>
+
+            <div class="text-[11px] text-slate-400 bg-slate-900 p-2.5 rounded border border-slate-800 mt-2">
+              <strong class="text-purple-300">Filtering Rule:</strong> That is why Step 1 of Task C1 strictly requires filtering out training pairs longer than 30 tokens!
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: RUBRIC & MISSION CONTROL            -->
+    <!-- ========================================== -->
+    <section id="tab-rubric" class="tab-panel hidden space-y-8">
+      
+      <!-- Rubric Scoreboard -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+          <div>
+            <h3 class="font-bold text-white text-lg flex items-center gap-2">
+              <span>🎯</span> Dr. Muhammad Awais' Official Marking Rubric
+            </h3>
+            <p class="text-xs text-slate-400">Total: 30 Marks (10 marks per attempted task) + 5 Bonus Marks</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">30 / 30 Target</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 text-slate-400 uppercase font-mono text-[11px]">
+                <th class="py-2.5 px-3">Rubric Criterion</th>
+                <th class="py-2.5 px-3">Marks</th>
+                <th class="py-2.5 px-3">What the Evaluator Verifies</th>
+                <th class="py-2.5 px-3">Our Implementation Defense</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y border-slate-800 text-slate-300">
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">1. Introduction & Problem Statement</td>
+                <td class="py-3 px-3 font-mono font-bold text-cyan-400">1.0</td>
+                <td>Clear motivation, formal mathematical notation $f: X \to y$, success metrics, and error penalties.</td>
+                <td>Rigorous formal math paragraph directly matching the IEEE 2-page template.</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">2. Dataset Used & Statistics</td>
+                <td class="py-3 px-3 font-mono font-bold text-cyan-400">1.5</td>
+                <td>Table 1 populated with exact row counts, missing values, class splits, and high-res EDA figures.</td>
+                <td>Zero placeholder entries. Automated Python scripts calculate true dataset properties.</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">3. Methodology & Splitting</td>
+                <td class="py-3 px-3 font-mono font-bold text-cyan-400">2.0</td>
+                <td>Zero data leakage! Scalers/encoders fit strictly on train split. Hyperparameters documented in Table 2.</td>
+                <td>Enforced via <code class="text-cyan-300">sklearn.pipeline.Pipeline</code> and <code class="text-cyan-300">ColumnTransformer</code>.</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">4. Implementation & Repo Integrity</td>
+                <td class="py-3 px-3 font-mono font-bold text-cyan-400">2.0</td>
+                <td>Notebook runs cleanly top-to-bottom with saved outputs. Git commit history has $\ge 5$ commits per task.</td>
+                <td>Staged incremental commits (EDA, baseline, tuning, evaluation, report) with annotated submission tag.</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">5. Results & Metrics</td>
+                <td class="py-3 px-3 font-mono font-bold text-cyan-400">1.5</td>
+                <td>Table 3 test-set results, predicted-vs-actual / confusion matrix / ROC / loss curve figures.</td>
+                <td>All numbers in report extracted directly from notebook variables; zero fabrication.</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">6. In-depth Analysis</td>
+                <td class="py-3 px-3 font-mono font-bold text-cyan-400">1.5</td>
+                <td>Answers all task-specific questions, conducts ablation study, concrete misclassified error cases.</td>
+                <td>Comprehensive written answers addressing physical concrete kinetics, fraud ablation, and translation order.</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">7. Two-Page Report Formatting</td>
+                <td class="py-3 px-3 font-mono font-bold text-cyan-400">0.5</td>
+                <td>Strictly $\le 2$ pages content double column. AI Disclosure & References on page 3.</td>
+                <td>Exact IEEE LaTeX style matching <code class="text-cyan-300">Report_Template_Two_Column.tex</code>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Interactive Pre-Submission Checklist -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <h3 class="font-bold text-white text-base mb-4 flex items-center gap-2">
+          <span>✅</span> Pre-Flight Submission Checklist (Interactive)
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs" id="checklist">
+          <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+            <input type="checkbox" checked class="w-4 h-4 rounded text-cyan-500">
+            <span>One task chosen per pool (A2, B1, C1)</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+            <input type="checkbox" checked class="w-4 h-4 rounded text-cyan-500">
+            <span>All scalers & encoders fit strictly on train split (no leakage)</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+            <input type="checkbox" checked class="w-4 h-4 rounded text-cyan-500">
+            <span>Notebook executed top-to-bottom with saved outputs</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+            <input type="checkbox" checked class="w-4 h-4 rounded text-cyan-500">
+            <span>Reports strictly $\le 2$ pages content double-column</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+            <input type="checkbox" checked class="w-4 h-4 rounded text-cyan-500">
+            <span>Mandatory AI Use Disclosure included in report and repo</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+            <input type="checkbox" checked class="w-4 h-4 rounded text-cyan-500">
+            <span>At least 5 meaningful commits per task in git history</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+            <input type="checkbox" checked class="w-4 h-4 rounded text-cyan-500">
+            <span>Final git tag: <code class="text-cyan-300">submission</code> pushed to main</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800 cursor-pointer hover:border-slate-700 transition">
+            <input type="checkbox" checked class="w-4 h-4 rounded text-cyan-500">
+            <span>Repo set to Public and tested in an incognito window</span>
+          </label>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // Tab switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-cyan-500', 'text-slate-950', 'shadow-lg', 'shadow-cyan-500/25');
+        btn.classList.add('bg-slate-800/80', 'text-slate-300');
+      });
+
+      document.getElementById(tabId).classList.remove('hidden');
+      const activeBtnId = tabId.replace('tab-', 'btn-');
+      const activeBtn = document.getElementById(activeBtnId);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-800/80', 'text-slate-300');
+        activeBtn.classList.add('bg-cyan-500', 'text-slate-950', 'shadow-lg', 'shadow-cyan-500/25');
+      }
+    }
+
+    // Concrete Simulation Logic
+    function runConcreteSim() {
+      const cement = parseFloat(document.getElementById('rng-cement').value);
+      const water = parseFloat(document.getElementById('rng-water').value);
+      const age = parseFloat(document.getElementById('rng-age').value);
+
+      document.getElementById('txt-cement').innerText = cement + ' kg/m³';
+      document.getElementById('txt-water').innerText = water + ' kg/m³';
+      document.getElementById('txt-age').innerText = age + ' Days';
+
+      const wc = water / cement;
+      document.getElementById('res-wc').innerText = wc.toFixed(2);
+      
+      const logAge = Math.log(age);
+      document.getElementById('res-log-age').innerText = logAge.toFixed(2);
+
+      const wcDesc = document.getElementById('res-wc-desc');
+      if (wc < 0.40) {
+        wcDesc.innerText = 'High Strength / Low Slump';
+        wcDesc.className = 'text-[10px] text-cyan-400';
+      } else if (wc <= 0.60) {
+        wcDesc.innerText = 'Optimal Structural Grade';
+        wcDesc.className = 'text-[10px] text-emerald-400';
+      } else {
+        wcDesc.innerText = 'High Porosity / Low Strength';
+        wcDesc.className = 'text-[10px] text-rose-400';
+      }
+
+      // Physics model: Abrams' Law + Logarithmic curing
+      let trueStrength = (98 / Math.pow(3.0, wc * 3.2)) * (0.32 + 0.29 * Math.log(age + 1));
+      trueStrength = Math.max(3.2, Math.min(84.0, trueStrength));
+
+      // Linear Model (Un-engineered, fails on early age & extremes)
+      let linPred = 15 + 0.08 * cement - 0.12 * water + 0.16 * age;
+      linPred = Math.max(2.0, linPred);
+
+      // Random Forest / Poly Ridge (captures non-linearity)
+      let rfPred = trueStrength + (Math.sin(age * 0.15) * 1.1) - (wc > 0.6 ? 1.5 : -0.4);
+
+      document.getElementById('hud-strength').innerText = trueStrength.toFixed(1) + ' MPa';
+      document.getElementById('val-true').innerText = trueStrength.toFixed(1) + ' MPa';
+      document.getElementById('val-lin').innerText = linPred.toFixed(1) + ' MPa';
+      document.getElementById('val-rf').innerText = rfPred.toFixed(1) + ' MPa';
+
+      const linErr = linPred - trueStrength;
+      const rfErr = rfPred - trueStrength;
+
+      document.getElementById('err-lin').innerText = 'Error: ' + (linErr > 0 ? '+' : '') + linErr.toFixed(1) + ' MPa (Violates Non-linearity)';
+      document.getElementById('err-rf').innerText = 'Error: ' + (rfErr > 0 ? '+' : '') + rfErr.toFixed(1) + ' MPa (R² ≈ 0.92)';
+
+      const hudStatus = document.getElementById('hud-status');
+      const crack = document.getElementById('crack-overlay');
+      if (trueStrength < 20) {
+        hudStatus.innerText = 'Low Strength / Risk of Cracking';
+        hudStatus.className = 'text-xs font-semibold text-rose-400 mt-0.5';
+        crack.style.opacity = '0.7';
+      } else if (trueStrength < 40) {
+        hudStatus.innerText = 'Standard Structural Grade';
+        hudStatus.className = 'text-xs font-semibold text-amber-400 mt-0.5';
+        crack.style.opacity = '0.1';
+      } else {
+        hudStatus.innerText = 'High-Performance Super-Concrete';
+        hudStatus.className = 'text-xs font-semibold text-emerald-400 mt-0.5';
+        crack.style.opacity = '0';
+      }
+    }
+
+    function setConcretePreset(type) {
+      if (type === 'standard') {
+        document.getElementById('rng-cement').value = 320;
+        document.getElementById('rng-water').value = 180;
+        document.getElementById('rng-age').value = 28;
+      } else if (type === 'highwater') {
+        document.getElementById('rng-cement').value = 210;
+        document.getElementById('rng-water').value = 230;
+        document.getElementById('rng-age').value = 7;
+      } else if (type === 'super') {
+        document.getElementById('rng-cement').value = 490;
+        document.getElementById('rng-water').value = 145;
+        document.getElementById('rng-age').value = 56;
+      }
+      runConcreteSim();
+    }
+
+    function triggerHydraulicCrush() {
+      const piston = document.getElementById('piston-head');
+      piston.classList.remove('pressing');
+      void piston.offsetWidth; // retrigger reflow
+      piston.classList.add('pressing');
+      runConcreteSim();
+    }
+
+    // Scam Jobs Simulation Logic
+    const jobData = {
+      scam: {
+        title: "Work from Home - Data Entry Executive ($45/hr)",
+        company: "Apex Global Virtual Careers • US, Remote",
+        badge: "FLAGGED SCAM",
+        badgeCls: "bg-rose-500/20 text-rose-400 border-rose-500/40",
+        logo: "❌ Missing (Signal)",
+        questions: "❌ None",
+        type: "Part-Time / Remote",
+        desc: '"Earn $3,500 weekly from home! Immediate start. No experience required. We send you a company check for initial home office equipment setup. Wire remaining funds via Western Union. Apply via Telegram @QuickPayManager..."',
+        sScore: "F1: 0.62 | PR-AUC: 0.58",
+        sWidth: "62%",
+        tScore: "F1: 0.74 | PR-AUC: 0.71",
+        tWidth: "74%",
+        cScore: "F1: 0.86 | PR-AUC: 0.83",
+        cWidth: "86%"
+      },
+      subtle: {
+        title: "Virtual Administrative Assistant",
+        company: "Omni Logistics Partners • Chicago, IL",
+        badge: "SUSPICIOUS",
+        badgeCls: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+        logo: "✅ Present",
+        questions: "❌ None",
+        type: "Contractor",
+        desc: '"Provide executive calendar assistance and invoice processing. Must have personal bank account ready for incoming vendor deposits. Interview conducted strictly via WhatsApp text messaging..."',
+        sScore: "F1: 0.48 | PR-AUC: 0.44",
+        sWidth: "48%",
+        tScore: "F1: 0.71 | PR-AUC: 0.68",
+        tWidth: "71%",
+        cScore: "F1: 0.83 | PR-AUC: 0.80",
+        cWidth: "83%"
+      },
+      legit: {
+        title: "Staff Data Engineer (Big Data & PySpark)",
+        company: "FinTech Enterprise Corp • New York, NY",
+        badge: "AUTHENTIC",
+        badgeCls: "bg-emerald-500/20 text-emerald-400 border-emerald-500/40",
+        logo: "✅ Present (Verified Domain)",
+        questions: "✅ 4 Screening Questions",
+        type: "Full-Time Employee",
+        desc: '"Design and orchestrate petabyte-scale data pipelines using Apache Spark, Airflow, and BigQuery. 5+ years experience required with distributed systems and CI/CD testing frameworks. Competitive 401(k) matching..."',
+        sScore: "F1: 0.64 | PR-AUC: 0.60",
+        sWidth: "64%",
+        tScore: "F1: 0.78 | PR-AUC: 0.75",
+        tWidth: "78%",
+        cScore: "F1: 0.89 | PR-AUC: 0.87",
+        cWidth: "89%"
+      }
+    };
+
+    function loadJobSample(key) {
+      const j = jobData[key];
+      document.getElementById('job-title').innerText = j.title;
+      document.getElementById('job-company').innerText = j.company;
+      document.getElementById('job-badge').innerText = j.badge;
+      document.getElementById('job-badge').className = 'px-2 py-0.5 rounded font-mono font-bold text-[10px] ' + j.badgeCls;
+      document.getElementById('job-logo').innerText = j.logo;
+      document.getElementById('job-questions').innerText = j.questions;
+      document.getElementById('job-type').innerText = j.type;
+      document.getElementById('job-desc').innerText = j.desc;
+
+      document.getElementById('score-struct').innerText = j.sScore;
+      document.getElementById('bar-struct').style.width = j.sWidth;
+      document.getElementById('score-text').innerText = j.tScore;
+      document.getElementById('bar-text').style.width = j.tWidth;
+      document.getElementById('score-comb').innerText = j.cScore;
+      document.getElementById('bar-comb').style.width = j.cWidth;
+
+      ['scam', 'subtle', 'legit'].forEach(k => {
+        const btn = document.getElementById('btn-job-' + k);
+        if (k === key) {
+          btn.classList.add('bg-slate-700', 'text-white');
+        } else {
+          btn.classList.remove('bg-slate-700', 'text-white');
+        }
+      });
+    }
+
+    function runAblationScan() {
+      const bars = ['bar-struct', 'bar-text', 'bar-comb'];
+      bars.forEach(b => {
+        const el = document.getElementById(b);
+        const w = el.style.width;
+        el.style.width = '0%';
+        setTimeout(() => { el.style.width = w; }, 100);
+      });
+    }
+
+    function updateFraudThreshold(val) {
+      document.getElementById('val-thresh-text').innerText = parseFloat(val).toFixed(2);
+      const t = parseFloat(val);
+      // Trade-off calculation
+      const recall = Math.min(99, Math.max(65, (1.1 - t * 0.5) * 100));
+      const prec = Math.min(96, Math.max(55, (0.6 + t * 0.4) * 100));
+      const fp = Math.round((1 - t) * 35);
+
+      document.getElementById('txt-fraud-rec').innerText = recall.toFixed(1) + '%';
+      document.getElementById('txt-fraud-prec').innerText = prec.toFixed(1) + '%';
+      document.getElementById('txt-fraud-fp').innerText = fp + ' / 1,000';
+    }
+
+    // Urdu NMT Attention Highlight
+    function highlightAttention(urIdx, enIndices) {
+      document.querySelectorAll('.en-tok').forEach(el => el.classList.remove('bg-purple-500', 'text-white', 'shadow-md'));
+      enIndices.forEach(idx => {
+        const el = document.getElementById('en-' + idx);
+        if (el) {
+          el.classList.add('bg-purple-500', 'text-white', 'shadow-md');
+        }
+      });
+    }
+
+    function resetAttention() {
+      document.querySelectorAll('.en-tok').forEach(el => el.classList.remove('bg-purple-500', 'text-white', 'shadow-md'));
+    }
+
+    // Initialize on load
+    runConcreteSim();
+  </script>
+</body>
+</html>
