@@ -1,0 +1,82 @@
+[
+  {
+    "Model": "Linear Regression",
+    "Features": "Raw (8)",
+    "Hyperparameters": "N/A",
+    "CV_RMSE_Mean": 10.627,
+    "CV_RMSE_Std": 0.477,
+    "Test_MAE": 7.746,
+    "Test_RMSE": 9.796,
+    "Test_R2": 0.628
+  },
+  {
+    "Model": "Linear Regression",
+    "Features": "Engineered",
+    "Hyperparameters": "N/A",
+    "CV_RMSE_Mean": 7.06,
+    "CV_RMSE_Std": 0.527,
+    "Test_MAE": 5.295,
+    "Test_RMSE": 6.562,
+    "Test_R2": 0.833
+  },
+  {
+    "Model": "Polynomial + Ridge",
+    "Features": "Raw (8)",
+    "Hyperparameters": "{'poly__degree': 2, 'ridge__alpha': 1.0}",
+    "CV_RMSE_Mean": 7.908,
+    "CV_RMSE_Std": 0.569,
+    "Test_MAE": 5.963,
+    "Test_RMSE": 7.43,
+    "Test_R2": 0.786
+  },
+  {
+    "Model": "Polynomial + Ridge",
+    "Features": "Engineered",
+    "Hyperparameters": "{'poly__degree': 2, 'ridge__alpha': 0.1}",
+    "CV_RMSE_Mean": 5.786,
+    "CV_RMSE_Std": 0.437,
+    "Test_MAE": 4.358,
+    "Test_RMSE": 5.483,
+    "Test_R2": 0.883
+  },
+  {
+    "Model": "Random Forest",
+    "Features": "Raw (8)",
+    "Hyperparameters": "{'rf__max_depth': 15, 'rf__min_samples_leaf': 1, 'rf__n_estimators': 200}",
+    "CV_RMSE_Mean": 5.312,
+    "CV_RMSE_Std": 0.442,
+    "Test_MAE": 3.782,
+    "Test_RMSE": 5.539,
+    "Test_R2": 0.881
+  },
+  {
+    "Model": "Random Forest",
+    "Features": "Engineered",
+    "Hyperparameters": "{'rf__max_depth': 15, 'rf__min_samples_leaf': 1, 'rf__n_estimators': 200}",
+    "CV_RMSE_Mean": 5.283,
+    "CV_RMSE_Std": 0.321,
+    "Test_MAE": 3.694,
+    "Test_RMSE": 5.356,
+    "Test_R2": 0.889
+  },
+  {
+    "Model": "Gradient Boosting",
+    "Features": "Engineered",
+    "Hyperparameters": "{'gbt__learning_rate': 0.1, 'gbt__max_depth': 5, 'gbt__n_estimators': 200}",
+    "CV_RMSE_Mean": 4.963,
+    "CV_RMSE_Std": 0.353,
+    "Test_MAE": 2.917,
+    "Test_RMSE": 4.555,
+    "Test_R2": 0.919
+  },
+  {
+    "Model": "MLPRegressor",
+    "Features": "Engineered",
+    "Hyperparameters": "{hidden: (64, 32), alpha: 0.01}",
+    "CV_RMSE_Mean": 4.926,
+    "CV_RMSE_Std": 0.571,
+    "Test_MAE": 3.554,
+    "Test_RMSE": 5.06,
+    "Test_R2": 0.901
+  }
+]
