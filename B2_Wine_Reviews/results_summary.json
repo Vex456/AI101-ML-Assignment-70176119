@@ -1,0 +1,61 @@
+{
+  "metrics": {
+    "Mean-Prediction Baseline": {
+      "MAE": 2.5935,
+      "RMSE": 3.154,
+      "R2": -0.0001
+    },
+    "Metadata-Only (Price + Origin)": {
+      "MAE": 1.9742,
+      "RMSE": 2.4779,
+      "R2": 0.3827
+    },
+    "Text-Only (Tasting Notes)": {
+      "MAE": 1.4549,
+      "RMSE": 1.8367,
+      "R2": 0.6609
+    },
+    "Combined Multimodal (Ridge)": {
+      "MAE": 1.3263,
+      "RMSE": 1.6768,
+      "R2": 0.7173
+    },
+    "Combined Multimodal (SGD)": {
+      "MAE": 1.5172,
+      "RMSE": 2.0681,
+      "R2": 0.57
+    },
+    "Combined Multimodal (GBDT)": {
+      "MAE": 1.7666,
+      "RMSE": 2.2382,
+      "R2": 0.4963
+    }
+  },
+  "mae_by_band": {
+    "80-84": 1.841,
+    "85-89": 1.177,
+    "90-94": 1.346,
+    "95-100": 2.185
+  },
+  "top_positive_words": [
+    "93",
+    "delicious",
+    "94",
+    "stunning",
+    "gorgeous",
+    "beautiful",
+    "complex",
+    "superb"
+  ],
+  "top_negative_words": [
+    "sugary",
+    "volatile",
+    "lack",
+    "vegetal",
+    "odd",
+    "clumsy",
+    "watery",
+    "lacks"
+  ],
+  "duplicates_removed": 7996
+}
