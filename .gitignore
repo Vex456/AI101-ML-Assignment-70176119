@@ -30,3 +30,11 @@ data/*
 # Operating system files
 .DS_Store
 Thumbs.db
+
+# Temporary / interactive files not part of official submission
+*.html
+Assignment_ML_Three_Data_Modalities.pdf
+Report_Template_Two_Column.pdf
+*.bak
+*.tmp
+

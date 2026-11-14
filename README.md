@@ -11,10 +11,10 @@
 
 | Field | Details |
 | :--- | :--- |
-| **Student Name** | [Student Name] |
-| **Roll Number** | [Roll Number] |
-| **Section** | [Section] |
-| **GitHub Repository** | `https://github.com/[username]/AI101-ML-Assignment-[RollNo]` |
+| **Student Name** | Muhammad Zaryab Attiq |
+| **Roll Number / SAP ID** | 70176119 |
+| **Section** | Section A |
+| **GitHub Repository** | `https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119` |
 
 ---
 
@@ -22,9 +22,9 @@
 
 | Pool | Task ID | Task Description | Primary Metric | Notebook Link | Report PDF |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Pool A (Numerical)** | **A2** | Predicting Concrete Compressive Strength | $R^2 = 0.919$ (GBDT) | [`A2_Concrete_Strength/A2_notebook.ipynb`](./A2_Concrete_Strength/A2_notebook.ipynb) | [`A2_Concrete_Strength/report/A2_Report.pdf`](./A2_Concrete_Strength/report/A2_Report.pdf) |
-| **Pool B (Mixed)** | **B1** | Detecting Fraudulent Job Postings | $F_1 = 0.835$, PR-AUC = 0.907 | [`B1_Fake_Job_Postings/B1_notebook.ipynb`](./B1_Fake_Job_Postings/B1_notebook.ipynb) | [`B1_Fake_Job_Postings/report/B1_Report.pdf`](./B1_Fake_Job_Postings/report/B1_Report.pdf) |
-| **Pool C (Seq2Seq)** | **C1** | English-to-Urdu Neural Machine Translation | MarianMT: 22.76 BLEU; Beam ($k=4$): 3.18 BLEU | [`C1_English_Urdu_NMT/C1_notebook.ipynb`](./C1_English_Urdu_NMT/C1_notebook.ipynb) | [`C1_English_Urdu_NMT/report/C1_Report.pdf`](./C1_English_Urdu_NMT/report/C1_Report.pdf) |
+| **Pool A (Numerical)** | **A2** | Predicting Concrete Compressive Strength | $R^2 = 0.919$ (GBDT) | [`A2_Concrete_Strength/A2_notebook.ipynb`](./A2_Concrete_Strength/A2_notebook.ipynb) | [`A2_Concrete_Strength/report/70176119_A2_Report.pdf`](./A2_Concrete_Strength/report/70176119_A2_Report.pdf) |
+| **Pool B (Mixed)** | **B1** | Detecting Fraudulent Job Postings | $F_1 = 0.835$, PR-AUC = 0.907 | [`B1_Fake_Job_Postings/B1_notebook.ipynb`](./B1_Fake_Job_Postings/B1_notebook.ipynb) | [`B1_Fake_Job_Postings/report/70176119_B1_Report.pdf`](./B1_Fake_Job_Postings/report/70176119_B1_Report.pdf) |
+| **Pool C (Seq2Seq)** | **C1** | English-to-Urdu Neural Machine Translation | MarianMT: 22.76 BLEU; Beam ($k=4$): 3.18 BLEU | [`C1_English_Urdu_NMT/C1_notebook.ipynb`](./C1_English_Urdu_NMT/C1_notebook.ipynb) | [`C1_English_Urdu_NMT/report/70176119_C1_Report.pdf`](./C1_English_Urdu_NMT/report/70176119_C1_Report.pdf) |
 
 ---
 
@@ -51,21 +51,13 @@
 
 ---
 
-## Interactive Pedagogical Learning Lab
-
-An interactive visualizer is included in this repository to demonstrate the underlying machine learning mechanisms (hydraulic press simulation for concrete kinetics, dual-stream scam job ablation scanner, and English-to-Urdu neural attention alignment):
-
-👉 Open [`Interactive_Learning_Hub.html`](./Interactive_Learning_Hub.html) in any modern web browser.
-
----
-
 ## How to Set Up and Run the Code
 
 ### 1. Environment Setup
 ```bash
 # Clone the repository
-git clone https://github.com/[username]/AI101-ML-Assignment-[RollNo].git
-cd AI101-ML-Assignment-[RollNo]
+git clone https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119.git
+cd AI101-ML-Assignment-70176119
 
 # Create and activate virtual environment
 python -m venv .venv
@@ -89,31 +81,30 @@ jupyter notebook C1_English_Urdu_NMT/C1_notebook.ipynb
 ## Repository Structure
 
 ```
-AI101-ML-Assignment-[RollNo]/
+AI101-ML-Assignment-70176119/
 |-- README.md                    # Project overview & submission table
 |-- AI_DISCLOSURE.md             # Mandatory course AI disclosure
 |-- requirements.txt             # Exact library requirements
 |-- .gitignore                   # Ignore data/, checkpoints, large binaries
-|-- Interactive_Learning_Hub.html# Interactive learning lab
 |-- A2_Concrete_Strength/        # Task A2: Concrete Compressive Strength
 |   |-- A2_notebook.ipynb        # Fully executed notebook
 |   |-- report/                  # 2-Page IEEE Conference Report PDF
 |   |   |-- source/              # LaTeX source files (.tex)
-|   |   `-- A2_Report.pdf
+|   |   `-- 70176119_A2_Report.pdf
 |   |-- figures/                 # High-resolution generated charts
 |   `-- data/README.md           # Dataset download instructions
 |-- B1_Fake_Job_Postings/        # Task B1: Fraudulent Job Postings Detection
 |   |-- B1_notebook.ipynb
 |   |-- report/
 |   |   |-- source/
-|   |   `-- B1_Report.pdf
+|   |   `-- 70176119_B1_Report.pdf
 |   |-- figures/
 |   `-- data/README.md
 `-- C1_English_Urdu_NMT/         # Task C1: English to Urdu NMT
     |-- C1_notebook.ipynb
     |-- report/
     |   |-- source/
-    |   `-- C1_Report.pdf
+    |   `-- 70176119_C1_Report.pdf
     |-- figures/
     `-- data/README.md
 ```

@@ -62,8 +62,8 @@ def generate_report(output_pdf_path):
     story.append(Paragraph("Task [C1]: [English-to-Urdu Neural Machine Translation]", style_title))
     story.append(Spacer(1, 3))
     story.append(Paragraph(
-        "<b>[Student Name]</b> &nbsp;|&nbsp; Roll No.: <b>[Roll Number]</b> &nbsp;|&nbsp; Section: <b>[Section]</b><br/>"
-        "Repository: <u>https://github.com/[username]/AI101-ML-Assignment-[RollNo]</u><br/>"
+        "<b>Muhammad Zaryab Attiq</b> &nbsp;|&nbsp; Roll No.: <b>70176119</b> &nbsp;|&nbsp; Section: <b>Section A</b><br/>"
+        "Repository: <u>https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119</u><br/>"
         "Instructor: <b>Dr. Muhammad Awais</b>, AI Architect", style_author))
     story.append(FrameBreak()) # Move to Col 1 Page 1
 
@@ -238,4 +238,4 @@ def generate_report(output_pdf_path):
     print(f"Report successfully compiled to: {output_pdf_path}")
 
 if __name__ == '__main__':
-    generate_report("C1_English_Urdu_NMT/report/C1_Report.pdf")
+    generate_report("C1_English_Urdu_NMT/report/70176119_C1_Report.pdf")

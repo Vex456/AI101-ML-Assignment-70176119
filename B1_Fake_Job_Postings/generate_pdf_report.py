@@ -60,7 +60,7 @@ def generate_report(output_pdf_path):
     story.append(Spacer(1, 2))
     story.append(Paragraph("Task [B1]: Detecting Fraudulent Job Postings", style_title))
     story.append(Spacer(1, 3))
-    story.append(Paragraph("<b>[Student Name]</b> &nbsp;|&nbsp; Roll No. [Roll Number] &nbsp;|&nbsp; Section [Section]<br/>Repository: <u>https://github.com/[username]/AI101-ML-Assignment-[RollNo]</u> &nbsp;|&nbsp; Instructor: Dr. Muhammad Awais, AI Architect", style_author))
+    story.append(Paragraph("<b>Muhammad Zaryab Attiq</b> &nbsp;|&nbsp; Roll No. 70176119 &nbsp;|&nbsp; Section A<br/>Repository: <u>https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119</u> &nbsp;|&nbsp; Instructor: Dr. Muhammad Awais, AI Architect", style_author))
     story.append(FrameBreak()) # To col1_p1
 
     # ------------------ COLUMN 1 (PAGE 1) ------------------
@@ -223,4 +223,4 @@ def generate_report(output_pdf_path):
     print(f"Successfully generated IEEE two-column report PDF at: {output_pdf_path}")
 
 if __name__ == '__main__':
-    generate_report("B1_Fake_Job_Postings/report/B1_Report.pdf")
+    generate_report("B1_Fake_Job_Postings/report/70176119_B1_Report.pdf")

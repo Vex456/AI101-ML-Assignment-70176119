@@ -33,8 +33,8 @@ cells.append(md_cell("""
 # Task [A2]: Predicting Concrete Compressive Strength
 **AI-101 Introduction to Artificial Intelligence • Fall 2026**  
 **Department of Intelligent Systems • The University of Lahore**  
-**Student Name:** [Student Name] | **Roll No.:** [Roll Number] | **Section:** [Section]  
-**Repository:** https://github.com/[username]/AI101-ML-Assignment-[RollNo]  
+**Student Name:** Muhammad Zaryab Attiq | **Roll No.:** 70176119 | **Section:** Section A  
+**Repository:** https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119  
 **Instructor:** Dr. Muhammad Awais, AI Architect
 """))
 
