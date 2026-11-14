@@ -1,0 +1,62 @@
+{
+  "metrics_5class": {
+    "Structured-Only (Logistic Reg.)": {
+      "Accuracy": 0.554,
+      "Macro-F1": 0.1426,
+      "Weighted-F1": 0.395,
+      "Ordinal_MAE": 0.816
+    },
+    "Text-Only (Logistic Reg.)": {
+      "Accuracy": 0.6314,
+      "Macro-F1": 0.383,
+      "Weighted-F1": 0.5915,
+      "Ordinal_MAE": 0.5004
+    },
+    "Combined Multimodal (Unweighted)": {
+      "Accuracy": 0.6273,
+      "Macro-F1": 0.3756,
+      "Weighted-F1": 0.5876,
+      "Ordinal_MAE": 0.511
+    },
+    "Combined Multimodal (Balanced)": {
+      "Accuracy": 0.589,
+      "Macro-F1": 0.4335,
+      "Weighted-F1": 0.6011,
+      "Ordinal_MAE": 0.5508
+    },
+    "Combined Multimodal (Linear SVM - Champion)": {
+      "Accuracy": 0.6135,
+      "Macro-F1": 0.3958,
+      "Weighted-F1": 0.5896,
+      "Ordinal_MAE": 0.5131
+    },
+    "Combined Multimodal (Random Forest)": {
+      "Accuracy": 0.5537,
+      "Macro-F1": 0.1426,
+      "Weighted-F1": 0.3949,
+      "Ordinal_MAE": 0.8166
+    }
+  },
+  "metrics_3class": {
+    "Accuracy": 0.8163,
+    "Macro-F1": 0.554,
+    "Weighted-F1": 0.7883
+  },
+  "misclassified_examples": [
+    {
+      "Review Excerpt": "This is a cute top but unfortunately when i washed it (delicate, cold water, line dry) it shrunk excessively in length. ...",
+      "True Rating": 3,
+      "Predicted Rating": 1
+    },
+    {
+      "Review Excerpt": "I was really wanting a nice white summer blouse to pair with patterned skirts. unfortunately, this fell short as it was ...",
+      "True Rating": 2,
+      "Predicted Rating": 4
+    },
+    {
+      "Review Excerpt": "Just note the pink is different than in the photos. much hotter/more saturated. apart from that surprise, overall i'd re...",
+      "True Rating": 4,
+      "Predicted Rating": 5
+    }
+  ]
+}
