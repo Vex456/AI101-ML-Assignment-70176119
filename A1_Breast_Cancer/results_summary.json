@@ -1,0 +1,47 @@
+{
+  "metrics": {
+    "Logistic Regression (Baseline)": {
+      "Accuracy": 0.9649,
+      "Precision": 0.975,
+      "Recall": 0.9286,
+      "F1-Score": 0.9512,
+      "ROC-AUC": 0.996
+    },
+    "SVM (RBF Kernel)": {
+      "Accuracy": 0.9737,
+      "Precision": 1.0,
+      "Recall": 0.9286,
+      "F1-Score": 0.963,
+      "ROC-AUC": 0.9927
+    },
+    "Random Forest": {
+      "Accuracy": 0.9737,
+      "Precision": 1.0,
+      "Recall": 0.9286,
+      "F1-Score": 0.963,
+      "ROC-AUC": 0.995
+    },
+    "Gradient Boosting": {
+      "Accuracy": 0.9649,
+      "Precision": 1.0,
+      "Recall": 0.9048,
+      "F1-Score": 0.95,
+      "ROC-AUC": 0.9947
+    }
+  },
+  "threshold_study": {
+    "default_threshold": 0.5,
+    "default_recall": 0.9048,
+    "default_precision": 1.0,
+    "calibrated_threshold": 0.05,
+    "calibrated_recall": 0.9524,
+    "calibrated_precision": 0.9524,
+    "precision_cost": 0.0476
+  },
+  "best_params": {
+    "Logistic Regression": "{'clf__C': 1.0}",
+    "SVM": "{'clf__C': 10.0, 'clf__gamma': 'scale'}",
+    "Random Forest": "{'clf__max_depth': 5, 'clf__n_estimators': 100}",
+    "Gradient Boosting": "{'clf__learning_rate': 0.1, 'clf__max_depth': 3, 'clf__n_estimators': 100}"
+  }
+}
