@@ -72,7 +72,7 @@ def build_notebook():
 **AI-101 Introduction to Artificial Intelligence • Fall 2026**  
 **Department of Intelligent Systems • The University of Lahore**  
 **Student Name:** Muhammad Zaryab Attiq | **Roll No.:** 70176119 | **Section:** Section A  
-**Repository:** https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119  
+**Repository:** https://github.com/Vex456/AI101-ML-Assignment-70176119  
 **Instructor:** Dr. Muhammad Awais, AI Architect
 """))
 

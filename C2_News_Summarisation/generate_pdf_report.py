@@ -64,7 +64,7 @@ def generate_report(output_pdf_path):
     story.append(Spacer(1, 3))
     story.append(Paragraph(
         "<b>Muhammad Zaryab Attiq</b> &nbsp;|&nbsp; Roll No.: <b>70176119</b> &nbsp;|&nbsp; Section: <b>Section A</b><br/>"
-        "Repository: <u>https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119</u><br/>"
+        "Repository: <u>https://github.com/Vex456/AI101-ML-Assignment-70176119</u><br/>"
         "Instructor: <b>Dr. Muhammad Awais</b>, AI Architect", style_author))
     story.append(FrameBreak()) # Move to Col 1 Page 1
 

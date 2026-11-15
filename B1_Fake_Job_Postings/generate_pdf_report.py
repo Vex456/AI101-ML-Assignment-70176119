@@ -60,7 +60,7 @@ def generate_report(output_pdf_path):
     story.append(Spacer(1, 2))
     story.append(Paragraph("Task [B1]: Detecting Fraudulent Job Postings", style_title))
     story.append(Spacer(1, 3))
-    story.append(Paragraph("<b>Muhammad Zaryab Attiq</b> &nbsp;|&nbsp; Roll No. 70176119 &nbsp;|&nbsp; Section A<br/>Repository: <u>https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119</u> &nbsp;|&nbsp; Instructor: Dr. Muhammad Awais, AI Architect", style_author))
+    story.append(Paragraph("<b>Muhammad Zaryab Attiq</b> &nbsp;|&nbsp; Roll No. 70176119 &nbsp;|&nbsp; Section A<br/>Repository: <u>https://github.com/Vex456/AI101-ML-Assignment-70176119</u> &nbsp;|&nbsp; Instructor: Dr. Muhammad Awais, AI Architect", style_author))
     story.append(FrameBreak()) # To col1_p1
 
     # ------------------ COLUMN 1 (PAGE 1) ------------------

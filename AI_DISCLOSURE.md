@@ -5,7 +5,7 @@
 **Student Name:** Muhammad Zaryab Attiq  
 **Roll No. / SAP ID:** 70176119  
 **Section:** Section A  
-**Repository:** https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119  
+**Repository:** https://github.com/Vex456/AI101-ML-Assignment-70176119  
 **Instructor:** Dr. Muhammad Awais (AI Architect)
 
 ---

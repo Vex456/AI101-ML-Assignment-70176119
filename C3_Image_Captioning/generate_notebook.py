@@ -45,7 +45,7 @@ def build_notebook(output_path):
 - **Roll Number / SAP ID:** 70176119
 - **Class Section:** Section A
 - **Instructor:** Dr. Muhammad Awais (AI Architect)
-- **GitHub Repository:** [https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119](https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119)
+- **GitHub Repository:** [https://github.com/Vex456/AI101-ML-Assignment-70176119](https://github.com/Vex456/AI101-ML-Assignment-70176119)
 
 ---
 

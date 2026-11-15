@@ -14,7 +14,7 @@
 | **Student Name** | Muhammad Zaryab Attiq |
 | **Roll Number / SAP ID** | 70176119 |
 | **Section** | Section A |
-| **GitHub Repository** | `https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119` |
+| **GitHub Repository** | `https://github.com/Vex456/AI101-ML-Assignment-70176119` |
 
 ---
 
@@ -67,7 +67,7 @@ Per course guidelines (Section 11 & Page 19 of the assignment specification), to
 ### 1. Environment Installation
 ```bash
 # Clone repository
-git clone https://github.com/Muhammad-Zaryab-Attiq/AI101-ML-Assignment-70176119.git
+git clone https://github.com/Vex456/AI101-ML-Assignment-70176119.git
 cd AI101-ML-Assignment-70176119
 
 # Create virtual environment
