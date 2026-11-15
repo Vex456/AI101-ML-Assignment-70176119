@@ -196,9 +196,7 @@ def generate_report(output_pdf_path):
         style_body
     ))
 
-    story.append(PageBreak()) # Move to Page 3 (Disclosures & References)
-
-    # ------------------ PAGE 3 - DISCLOSURE & REFS ------------------
+    # ------------------ AI DISCLOSURE & REFS (FITS ON PAGE 2) ------------------
     story.append(Paragraph("AI USE DISCLOSURE STATEMENT", style_h1))
     story.append(Paragraph(
         "• <b>AI Tool Utilized:</b> Google Antigravity Agent (Gemini 2.5 Pro).<br/>"
@@ -206,7 +204,6 @@ def generate_report(output_pdf_path):
         "• <b>Human Verification:</b> All models and reframing evaluations were executed locally with fixed random seeds (seed=42); all reported numbers match notebook outputs 1:1.",
         style_body
     ))
-    story.append(Spacer(1, 10))
 
     story.append(Paragraph("REFERENCES", style_h1))
     refs = [

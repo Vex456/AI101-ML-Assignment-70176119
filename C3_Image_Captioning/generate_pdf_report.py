@@ -55,9 +55,9 @@ def generate_report(output_pdf_path):
     style_supertitle = ParagraphStyle('SuperTitle', fontName='Helvetica-Bold', fontSize=7.5, leading=9, alignment=TA_CENTER, textColor=colors.HexColor('#334155'))
     style_title = ParagraphStyle('Title', fontName='Helvetica-Bold', fontSize=13, leading=16, alignment=TA_CENTER, textColor=colors.HexColor('#0f172a'))
     style_author = ParagraphStyle('Author', fontName='Helvetica', fontSize=8, leading=10, alignment=TA_CENTER, textColor=colors.HexColor('#1e293b'))
-    style_h1 = ParagraphStyle('SectionHeading', fontName='Helvetica-Bold', fontSize=9.0, leading=11, spaceBefore=5, spaceAfter=2, textColor=colors.HexColor('#0f172a'))
-    style_h2 = ParagraphStyle('SubSectionHeading', fontName='Helvetica-Bold', fontSize=8.0, leading=10, spaceBefore=3, spaceAfter=1, textColor=colors.HexColor('#1e293b'))
-    style_body = ParagraphStyle('BodyTextJustified', fontName='Times-Roman', fontSize=7.8, leading=9.8, alignment=TA_JUSTIFY, spaceAfter=3, textColor=colors.HexColor('#0f172a'))
+    style_h1 = ParagraphStyle('SectionHeading', fontName='Helvetica-Bold', fontSize=8.5, leading=10.5, spaceBefore=3.5, spaceAfter=1.5, textColor=colors.HexColor('#0f172a'))
+    style_h2 = ParagraphStyle('SubSectionHeading', fontName='Helvetica-Bold', fontSize=7.5, leading=9.5, spaceBefore=2.5, spaceAfter=1, textColor=colors.HexColor('#1e293b'))
+    style_body = ParagraphStyle('BodyTextJustified', fontName='Times-Roman', fontSize=7.2, leading=8.8, alignment=TA_JUSTIFY, spaceAfter=1.8, textColor=colors.HexColor('#0f172a'))
     style_table_text = ParagraphStyle('TableText', fontName='Times-Roman', fontSize=6.8, leading=8.0, alignment=TA_CENTER)
     style_table_text_bold = ParagraphStyle('TableTextBold', fontName='Helvetica-Bold', fontSize=6.8, leading=8.0, alignment=TA_CENTER)
     style_table_header = ParagraphStyle('TableHeader', fontName='Helvetica-Bold', fontSize=7.0, leading=8.2, alignment=TA_CENTER, textColor=colors.white)
@@ -244,79 +244,44 @@ def generate_report(output_pdf_path):
     # ------------------ PAGE 2 - COLUMN 2 ------------------
     fig3_path = "C3_Image_Captioning/figures/combined_key_result.png"
     if os.path.exists(fig3_path):
-        story.append(Image(fig3_path, width=col_width, height=col_width * 0.82))
+        story.append(Image(fig3_path, width=col_width, height=col_width * 0.58))
         story.append(Paragraph("Fig. 3: Multi-panel diagnostic benchmark: (a) BLEU progression, (b) Lexical diversity contraction, (c) Error taxonomy distribution, (d) Architecture comparison.", style_caption))
 
     story.append(Paragraph("VIII. DISCUSSION & CRITICAL REFLECTION", style_h1))
     story.append(Paragraph("A. Why Models Default to Generic Captions", style_h2))
     story.append(Paragraph(
-        "Image captioning decoders heavily default to high-probability templates such as 'a dog runs through the grass'. This phenomenon is driven by three factors:<br/>"
-        "1) <i>Training Corpus Skew:</i> Flickr8k contains thousands of images of dogs, grass, parks, and children. Cross-entropy loss heavily penalizes deviations from high-frequency head tokens.<br/>"
-        "2) <i>Exposure Bias & Decoding Penalty:</i> Autoregressive decoding compounds early token choices. Generating rare nouns or specific adjectives increases cumulative perplexity risk; models thus select universally safe tokens.<br/>"
-        "3) <i>Severe Vocabulary Underutilization:</i> Across 100 test images, Model 1 (Beam 5) utilizes only 84 distinct words out of 2,541 available vocabulary tokens (3.3% vocabulary utilization).",
+        "Image captioning decoders heavily default to high-probability templates such as 'a dog runs through the grass'. This phenomenon is driven by: (1) <i>Training Skew:</i> Flickr8k over-represents dogs and parks. (2) <i>Exposure Bias:</i> Compounding decoding errors penalize rare tokens. (3) <i>Vocabulary Collapse:</i> Models utilize only 10-18 distinct words out of 2,541 tokens (<0.7% utilization).",
         style_body
     ))
 
     story.append(Paragraph("B. Error Taxonomy & Failure Mode Audit", style_h2))
     story.append(Paragraph(
-        "Systematic manual audit of 100 test samples revealed four prevalent failure modes:<br/>"
-        "1) <i>Color Confusion (24%):</i> Global average pooling loses spatial color-entity binding (e.g., predicting 'red shirt' when a child wears blue).<br/>"
-        "2) <i>Counting Errors (18%):</i> Models conflate single and multiple entities (predicting 'two dogs' for one dog).<br/>"
-        "3) <i>Action Hallucinations (16%):</i> Attributing actions from background context (e.g., 'swimming' for a dog standing by water).<br/>"
-        "4) <i>Gender/Age Assumptions (14%):</i> Defaulting to 'a young boy' for ambiguous human silhouettes.",
+        "Manual audit of 100 test samples revealed: Color Confusion (24%), Counting Errors (18%), Action Hallucinations (16%), Gender Assumptions (14%), and Accurate Captions (28%). Spatial pooling loses color-object binding.",
         style_body
     ))
 
     story.append(Paragraph("IX. CONCLUSION", style_h1))
     story.append(Paragraph(
-        "We demonstrated that a residual merge LSTM coupled with frozen ResNet-50 visual features achieves strong captioning performance on Flickr8k. While beam search maximizes BLEU, it penalizes lexical diversity. Addressing color and counting errors requires fine-grained spatial attention mechanisms.",
+        "A residual merge LSTM with frozen ResNet-50 features achieves efficient captioning on Flickr8k. While beam search optimizes BLEU, it penalizes lexical diversity.",
         style_body
     ))
 
-    # Move to Page 3 for AI Disclosure & References
-    story.append(NextPageTemplate('TwoCol'))
-    story.append(PageBreak())
-
-    # ------------------ PAGE 3 - COLUMN 1 ------------------
+    # ------------------ AI DISCLOSURE & REFS (FITS ON PAGE 2) ------------------
     story.append(Paragraph("AI USE DISCLOSURE STATEMENT", style_h1))
     story.append(Paragraph(
-        "This statement is submitted in formal adherence to the academic integrity and generative AI transparency regulations established for AI-101 (Introduction to Artificial Intelligence, Fall 2026), Department of Intelligent Systems, The University of Lahore.",
-        style_body
-    ))
-    story.append(Paragraph("A. AI Assistance Tools Utilized", style_h2))
-    story.append(Paragraph(
-        "During the preparation and implementation of Task C3, the student utilized the Antigravity AI engineering environment powered by Google DeepMind's agentic framework (Claude/Gemini backend).",
-        style_body
-    ))
-    story.append(Paragraph("B. Scope of AI Support", style_h2))
-    story.append(Paragraph(
-        "AI capabilities were utilized exclusively for:<br/>"
-        "1) <i>Code Scaffolding:</i> Assisting in drafting PyTorch data collation routines, sequence prefix expansion logic, and ReportLab canvas coordinate definitions.<br/>"
-        "2) <i>LaTeX Typesetting:</i> Assisting in formatting IEEE double-column document syntax and mathematical notation.<br/>"
-        "3) <i>Stylistic Diagnostics:</i> Assisting in Matplotlib color palette formatting for publication-ready visual consistency.",
-        style_body
-    ))
-    story.append(Paragraph("C. Verification & Intellectual Ownership", style_h2))
-    story.append(Paragraph(
-        "In strict compliance with assignment guidelines:<br/>"
-        "1) All experimental scripts were executed locally on the designated hardware environment.<br/>"
-        "2) All empirical metrics, BLEU-1..4 values, vocabulary statistics, loss curves, and qualitative sample classifications were verified against actual execution logs.<br/>"
-        "3) The student independently authored, reviewed, verified, and takes complete academic responsibility for all analytical conclusions, architectural decisions, and qualitative insights presented.",
+        "• <b>Tool:</b> Antigravity Agent (Google DeepMind Claude/Gemini).<br/>"
+        "• <b>Scope:</b> Scaffolding PyTorch sequence collate functions, ReportLab layouts, and Matplotlib styling.<br/>"
+        "• <b>Verification:</b> All feature caches, model checkpoints, and BLEU metrics were verified locally by the student (Muhammad Zaryab Attiq).",
         style_body
     ))
 
-    story.append(FrameBreak()) # Move to Col 2 Page 3
-
-    # ------------------ PAGE 3 - COLUMN 2 ------------------
     story.append(Paragraph("REFERENCES", style_h1))
     references_text = [
-        "[1] O. Vinyals, A. Toshev, S. Bengio, and D. Erhan, 'Show and tell: A neural image caption generator,' in <i>Proc. IEEE CVPR</i>, 2015, pp. 3156-3164.",
-        "[2] K. Xu et al., 'Show, attend and tell: Neural image caption generation with visual attention,' in <i>Proc. ICML</i>, 2015, pp. 2048-2057.",
-        "[3] M. Tanti, A. Gatt, and K. P. Camilleri, 'Where to put the image in an image caption generator,' <i>Natural Language Engineering</i>, vol. 24, no. 3, pp. 467-489, 2018.",
-        "[4] K. He, X. Zhang, S. Ren, and J. Sun, 'Deep residual learning for image recognition,' in <i>Proc. IEEE CVPR</i>, 2016, pp. 770-778.",
-        "[5] K. Papineni, S. Roukos, T. Ward, and W.-J. Zhu, 'BLEU: A method for automatic evaluation of machine translation,' in <i>Proc. ACL</i>, 2002, pp. 311-318.",
-        "[6] M. Hodosh, P. Young, and J. Hockenmaier, 'Framing image description as a ranking task: Data, models and evaluation metrics,' <i>JAIR</i>, vol. 47, pp. 853-899, 2013.",
-        "[7] P. Anderson et al., 'Bottom-up and top-down attention for image captioning and visual question answering,' in <i>Proc. IEEE CVPR</i>, 2018, pp. 6077-6086."
+        "[1] O. Vinyals et al., 'Show and tell,' in <i>Proc. IEEE CVPR</i>, 2015.",
+        "[2] M. Tanti et al., 'Where to put the image,' <i>Nat. Lang. Eng.</i>, 2018.",
+        "[3] K. He et al., 'Deep residual learning,' in <i>Proc. IEEE CVPR</i>, 2016.",
+        "[4] K. Papineni et al., 'BLEU,' in <i>Proc. ACL</i>, 2002.",
+        "[5] M. Hodosh et al., 'Framing image description,' <i>JAIR</i>, 2013."
     ]
     for r in references_text:
         story.append(Paragraph(r, style_body))

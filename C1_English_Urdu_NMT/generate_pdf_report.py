@@ -46,9 +46,9 @@ def generate_report(output_pdf_path):
     style_supertitle = ParagraphStyle('SuperTitle', fontName='Helvetica-Bold', fontSize=7.5, leading=9, alignment=TA_CENTER, textColor=colors.HexColor('#334155'))
     style_title = ParagraphStyle('Title', fontName='Helvetica-Bold', fontSize=14, leading=17, alignment=TA_CENTER, textColor=colors.HexColor('#0f172a'))
     style_author = ParagraphStyle('Author', fontName='Helvetica', fontSize=8, leading=10, alignment=TA_CENTER, textColor=colors.HexColor('#1e293b'))
-    style_h1 = ParagraphStyle('SectionHeading', fontName='Helvetica-Bold', fontSize=9.5, leading=12, spaceBefore=6, spaceAfter=2, textColor=colors.HexColor('#0f172a'))
-    style_h2 = ParagraphStyle('SubSectionHeading', fontName='Helvetica-Bold', fontSize=8.5, leading=11, spaceBefore=4, spaceAfter=1, textColor=colors.HexColor('#1e293b'))
-    style_body = ParagraphStyle('BodyTextJustified', fontName='Times-Roman', fontSize=8.2, leading=10.2, alignment=TA_JUSTIFY, spaceAfter=4, textColor=colors.HexColor('#0f172a'))
+    style_h1 = ParagraphStyle('SectionHeading', fontName='Helvetica-Bold', fontSize=8.8, leading=11, spaceBefore=4, spaceAfter=1.5, textColor=colors.HexColor('#0f172a'))
+    style_h2 = ParagraphStyle('SubSectionHeading', fontName='Helvetica-Bold', fontSize=7.8, leading=10, spaceBefore=3, spaceAfter=1, textColor=colors.HexColor('#1e293b'))
+    style_body = ParagraphStyle('BodyTextJustified', fontName='Times-Roman', fontSize=7.5, leading=9.4, alignment=TA_JUSTIFY, spaceAfter=2.5, textColor=colors.HexColor('#0f172a'))
     style_table_text = ParagraphStyle('TableText', fontName='Times-Roman', fontSize=7.0, leading=8.2, alignment=TA_CENTER)
     style_table_text_bold = ParagraphStyle('TableTextBold', fontName='Helvetica-Bold', fontSize=7.0, leading=8.2, alignment=TA_CENTER)
     style_table_header = ParagraphStyle('TableHeader', fontName='Helvetica-Bold', fontSize=7.2, leading=8.5, alignment=TA_CENTER, textColor=colors.white)
@@ -211,9 +211,7 @@ def generate_report(output_pdf_path):
         style_body
     ))
 
-    story.append(PageBreak()) # Move to Page 3 (Disclosures & References)
-
-    # ------------------ PAGE 3 - DISCLOSURE & REFS ------------------
+    # ------------------ AI DISCLOSURE & REFS (FITS ON PAGE 2) ------------------
     story.append(Paragraph("AI USE DISCLOSURE STATEMENT", style_h1))
     story.append(Paragraph(
         "• <b>AI Tool Utilized:</b> Google Antigravity Agent (Gemini 2.5 Pro).<br/>"
@@ -221,7 +219,6 @@ def generate_report(output_pdf_path):
         "• <b>Human Verification:</b> All training scripts, hyperparameter configurations, loss trajectories, evaluation metrics, and qualitative error analyses were executed locally, inspected, and validated against assignment specifications.",
         style_body
     ))
-    story.append(Spacer(1, 10))
 
     story.append(Paragraph("REFERENCES", style_h1))
     refs = [

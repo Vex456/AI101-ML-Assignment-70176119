@@ -207,14 +207,10 @@ def generate_report(output_pdf_path):
     story.append(Paragraph("7. Conclusion", style_h1))
     story.append(Paragraph("We developed an end-to-end multimodal pipeline for employment scam detection, demonstrating that combining structured administrative metadata with TF-IDF text features inside a zero-leakage ColumnTransformer yields a PR-AUC of 0.907 and an F1 score of 0.835. Calibrating decision thresholds on validation data was crucial for optimizing minority-class detection. Future work should investigate pre-trained transformer embeddings and corporate entity graph linking.", style_body))
 
-    # Trigger PageBreak to Page 3 (AI Disclosure & References only)
-    story.append(PageBreak())
-
-    # ------------------ PAGE 3 (DISCLOSURE & REFS ONLY) ------------------
+    # ------------------ AI DISCLOSURE & REFS (FITS ON PAGE 2) ------------------
     story.append(Paragraph("AI Use Disclosure", style_h1))
     story.append(Paragraph("I used <b>Antigravity (powered by Google DeepMind Gemini)</b> for pipeline scaffolding, exploratory data visualization code, and mathematical phrasing of the problem statement. All experiments, cross-validations, metrics, and analyses were produced, verified, and checked by me, and I take full responsibility for this work.", style_body))
 
-    story.append(Spacer(1, 10))
     story.append(Paragraph("References", style_h1))
     story.append(Paragraph("[1] S. Vidros, C. Kolias, G. Kambourakis, and L. Akoglu, &ldquo;Automatic detection of online recruitment frauds: Characteristics, methods, and a public dataset,&rdquo; <i>Future Internet</i>, vol. 9, no. 1, p. 6, 2017.", style_body))
     story.append(Paragraph("[2] F. Pedregosa <i>et al.</i>, &ldquo;Scikit-learn: Machine learning in Python,&rdquo; <i>Journal of Machine Learning Research</i>, vol. 12, pp. 2825&ndash;2830, 2011.", style_body))

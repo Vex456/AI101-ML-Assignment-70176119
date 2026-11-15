@@ -199,14 +199,10 @@ def generate_report(output_pdf_path):
     story.append(Paragraph("7. Conclusion", style_h1))
     story.append(Paragraph("This study demonstrates that marrying domain-grounded physical features (log(Age) and water/cement ratio) with Gradient Tree Boosting produces an accurate predictive model for concrete compressive strength (R² = 0.919, RMSE = 4.555 MPa). Linear models were significantly improved through physical transformations. Future work should integrate ambient curing temperature telemetry and explore physics-informed neural loss functions.", style_body))
 
-    # Trigger PageBreak to Page 3 (AI Disclosure & References only)
-    story.append(PageBreak())
-
-    # ------------------ PAGE 3 (DISCLOSURE & REFS ONLY) ------------------
+    # ------------------ AI DISCLOSURE & REFS (FITS ON PAGE 2) ------------------
     story.append(Paragraph("AI Use Disclosure", style_h1))
     story.append(Paragraph("I used <b>Antigravity (powered by Google DeepMind Gemini)</b> for pipeline scaffolding, exploratory data visualization code, and mathematical phrasing of the problem statement. All experiments, cross-validations, metrics, and analyses were produced, verified, and checked by me, and I take full responsibility for this work.", style_body))
 
-    story.append(Spacer(1, 10))
     story.append(Paragraph("References", style_h1))
     story.append(Paragraph("[1] I-C. Yeh, &ldquo;Modeling of strength of high-performance concrete using artificial neural networks,&rdquo; <i>Cement and Concrete Research</i>, vol. 28, no. 12, pp. 1797&ndash;1808, 1998.", style_body))
     story.append(Paragraph("[2] F. Pedregosa <i>et al.</i>, &ldquo;Scikit-learn: Machine learning in Python,&rdquo; <i>Journal of Machine Learning Research</i>, vol. 12, pp. 2825&ndash;2830, 2011.", style_body))
