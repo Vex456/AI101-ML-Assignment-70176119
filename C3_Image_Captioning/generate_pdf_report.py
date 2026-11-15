@@ -326,5 +326,5 @@ def generate_report(output_pdf_path):
 
 if __name__ == '__main__':
     import sys
-    out_path = sys.argv[1] if len(sys.argv) > 1 else "C3_Image_Captioning/70176119_C3_Report.pdf"
+    out_path = sys.argv[1] if len(sys.argv) > 1 else "C3_Image_Captioning/report/70176119_C3_Report.pdf"
     generate_report(out_path)
