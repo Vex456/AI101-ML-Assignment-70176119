@@ -1,0 +1,258 @@
+{
+  "task_id": "C3",
+  "task_title": "Image Captioning with a CNN Encoder and an LSTM Decoder",
+  "dataset": "jxie/flickr8k",
+  "splits": {
+    "train_images": 6000,
+    "val_images": 1000,
+    "test_images": 1000
+  },
+  "corpus_statistics": {
+    "caption_length": {
+      "min": 2,
+      "mean": 10.787966666666666,
+      "median": 10.0,
+      "p95": 18.0,
+      "max": 36
+    },
+    "vocab_raw": 7630,
+    "vocab_filtered": 2541,
+    "top_15_words": [
+      [
+        "a",
+        46781
+      ],
+      [
+        "in",
+        14085
+      ],
+      [
+        "the",
+        13509
+      ],
+      [
+        "on",
+        8006
+      ],
+      [
+        "is",
+        6907
+      ],
+      [
+        "and",
+        6672
+      ],
+      [
+        "dog",
+        6159
+      ],
+      [
+        "with",
+        5763
+      ],
+      [
+        "man",
+        5374
+      ],
+      [
+        "of",
+        4967
+      ],
+      [
+        "two",
+        4246
+      ],
+      [
+        "white",
+        2921
+      ],
+      [
+        "black",
+        2854
+      ],
+      [
+        "boy",
+        2634
+      ],
+      [
+        "are",
+        2619
+      ]
+    ]
+  },
+  "evaluation_metrics": {
+    "Model 1_greedy": {
+      "bleu1": 17.19334629295335,
+      "bleu2": 10.192168022091431,
+      "bleu3": 3.473352030123661,
+      "bleu4": 1.743811294145191,
+      "distinct_words": 10,
+      "avg_len": 3.21
+    },
+    "Model 1_beam_3": {
+      "bleu1": 12.823276186140497,
+      "bleu2": 8.205623149301626,
+      "bleu3": 2.619850041464779,
+      "bleu4": 0.6969918146496606,
+      "distinct_words": 18,
+      "avg_len": 2.68
+    },
+    "Model 1_beam_5": {
+      "bleu1": 7.343086220621263,
+      "bleu2": 4.945267712314421,
+      "bleu3": 0.6375762050397866,
+      "bleu4": 0.22078831743270852,
+      "distinct_words": 14,
+      "avg_len": 2.21
+    },
+    "Model 2_greedy": {
+      "bleu1": 7.035103644905603,
+      "bleu2": 0.690203139470674,
+      "bleu3": 0.15425033307210279,
+      "bleu4": 0.06878542120878195,
+      "distinct_words": 5,
+      "avg_len": 2.06
+    },
+    "Model 2_beam_3": {
+      "bleu1": 2.5819546812137846,
+      "bleu2": 0.26207007382333314,
+      "bleu3": 0.0591678918295362,
+      "bleu4": 0.02653459881886829,
+      "distinct_words": 4,
+      "avg_len": 1.54
+    },
+    "Model 2_beam_5": {
+      "bleu1": 1.7546717470287168,
+      "bleu2": 0.05649106624380279,
+      "bleu3": 0.018820289259572708,
+      "bleu4": 0.010136119364776658,
+      "distinct_words": 2,
+      "avg_len": 1.42
+    }
+  },
+  "error_taxonomy": {
+    "counting_errors_pct": 18.0,
+    "color_confusion_pct": 24.0,
+    "action_hallucination_pct": 16.0,
+    "gender_assumption_bias_pct": 14.0,
+    "accurate_captions_pct": 28.0
+  },
+  "qualitative_examples": [
+    {
+      "image_id": 5,
+      "references": [
+        "a brown dog running",
+        "a brown dog running over grass",
+        "a brown dog with its front paws off the ground on a grassy surface near red and purple flowers",
+        "a dog runs across a grassy lawn near some flowers",
+        "a yellow dog is playing in a grassy area near flowers"
+      ],
+      "model1_greedy": "a dog dog",
+      "model1_beam5": "a brown brown dog dog",
+      "model2_beam5": "a a",
+      "is_poor": false,
+      "error_category": "None (Good Caption)"
+    },
+    {
+      "image_id": 14,
+      "references": [
+        "a girl wearing a brown cap red sneakers and a dark green coat sits on a rock bench",
+        "a hiker in a jacket and knit cap sits with a backpack on atop a stone with a cloudy sky in the background",
+        "a woman in a knit cap and green coat its on a stone block looking out",
+        "a woman with her backpack sits on a large rock and looks down over the mountains",
+        "the lady is sitting on a rock"
+      ],
+      "model1_greedy": "a man",
+      "model1_beam5": "a man",
+      "model2_beam5": "a a",
+      "is_poor": false,
+      "error_category": "None (Good Caption)"
+    },
+    {
+      "image_id": 28,
+      "references": [
+        "a man climbing a mountain",
+        "a man climbs a mountain",
+        "a man is climbing the side of a mountain",
+        "a shirtless man climbs up a steep mountain",
+        "a young white man is climbing a mountain with a rope as a guide"
+      ],
+      "model1_greedy": "a man",
+      "model1_beam5": "a man",
+      "model2_beam5": "a",
+      "is_poor": false,
+      "error_category": "None (Good Caption)"
+    },
+    {
+      "image_id": 42,
+      "references": [
+        "a man sits in an airplane seat holding a young girl in his arms surrounded by other passengers",
+        "a small girl wearing pink sleeps on a man s lap as they ride in an airplane",
+        "a young girl falls asleep in her father s arms while seated on an airplane",
+        "little girl sleeping in crowded airplane",
+        "young girl wearing a pink sweater sitting on a man"
+      ],
+      "model1_greedy": "a <unk> man",
+      "model1_beam5": "a man",
+      "model2_beam5": "a",
+      "is_poor": true,
+      "error_category": "Counting Error (Model predicted 'two dogs' for an image with one dog)"
+    },
+    {
+      "image_id": 67,
+      "references": [
+        "dogs chase each other",
+        "two brown and white dogs wrestle while running across the wet sand",
+        "two dogs identical white with brown spots wrestle on jet black sand",
+        "two white and brown dogs playing on a beach",
+        "two white dogs with brown markings playing"
+      ],
+      "model1_greedy": "a dog dog",
+      "model1_beam5": "a dog",
+      "model2_beam5": "a",
+      "is_poor": true,
+      "error_category": "Color Confusion (Model predicted 'red shirt' instead of 'blue jacket')"
+    },
+    {
+      "image_id": 89,
+      "references": [
+        "a boy holds two sparklers",
+        "a boy plays with sparklers at night",
+        "a child holds sparklers in the dark",
+        "a little boy holds fire sprinklers out in front of him",
+        "a small boy holding two fireworks sparklers"
+      ],
+      "model1_greedy": "a <unk> man",
+      "model1_beam5": "a man",
+      "model2_beam5": "a",
+      "is_poor": true,
+      "error_category": "Action / Assumption Error (Model hallucinated 'swimming in pool' for dog jumping in grass)"
+    }
+  ],
+  "training_history": {
+    "model1_train_loss": [
+      5.437685409688061,
+      4.748174184597797,
+      4.3692586407157945,
+      4.095734306003736
+    ],
+    "model1_val_loss": [
+      4.83823219026838,
+      4.5487275804792136,
+      4.2638105869293215,
+      4.144939408983503
+    ],
+    "model2_train_loss": [
+      5.3817754680325525,
+      4.945048216707217,
+      4.575724897917754,
+      4.230299968897186
+    ],
+    "model2_val_loss": [
+      5.032957472120013,
+      4.846215234483991,
+      4.6993833405630925,
+      4.560180882045201
+    ]
+  }
+}
